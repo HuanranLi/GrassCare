@@ -83,6 +83,14 @@ The major framework this project uses are Python, and its supplementary packages
       <td>...</td>
       <td>...</td>
     </tr>
+    <tr>
+      <td>U_0^T</td>
+      <td>U_1^T</td>
+      <td>U_2^T</td>
+      <td>U_3^T</td>
+      <td>...</td>
+      <td>U_N^T</td>
+    </tr>
   </tbody>
 </table>
 
