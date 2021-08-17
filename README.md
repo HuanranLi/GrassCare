@@ -82,7 +82,7 @@ The major framework this project uses are Python, and its supplementary packages
   * video: True - Generate a video in gif format to display the path with shifting in time. If only one single time frame is contained in S, (i.e. T = 0), video will be generated to show its optimization path instead of clustering path.
   * optional_params: It is default to be an empty dictionary. If no params are needed, just run `grasscare_plot(S, labels, video)`. Here are options for parameter:
   
-      <table id="vertical-1">
+      <table id="OPT">
             <tr>
               <th>Name</th>
               <th>Value Type</th>
