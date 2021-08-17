@@ -57,42 +57,30 @@ The major framework this project uses are Python, and its supplementary packages
 <!-- Function Interface -->
  The main function is called `grasscare_plot(S, labels, video, optional_params)`. It has following parameter:
   * S: A matrix of Grassmannian points:
-  <table border="1">
-  <tbody>
-    <tr>
-      <td>U<sub>0</sub><sup>0</sup></td>
-      <td>U_1^0</td>
-      <td>U_2^0</td>
-      <td>U_3^0</td>
-      <td>...</td>
-      <td>U_N^0</td>
-    </tr>
-    <tr>
-      <td>U_0^1</td>
-      <td>U_1^1</td>
-      <td>U_2^1</td>
-      <td>U_3^1</td>
-      <td>...</td>
-      <td>U_N^1</td>
-    </tr>
-     <tr>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <td>U_0^T</td>
-      <td>U_1^T</td>
-      <td>U_2^T</td>
-      <td>U_3^T</td>
-      <td>...</td>
-      <td>U_N^T</td>
-    </tr>
-  </tbody>
-</table>
+  
+   
+    <table id="vertical-1">
+            <caption>S</caption>
+            <tr>
+                <th>t = 0</th>
+                <td>U<sub>0</sub><sup>0</sup></td> <td>U<sub>1</sub><sup>0</sup></td> <td>...</td> <td>U<sub>1</sub><sup>0</sup></td> 
+            </tr>
+            <tr>
+                <th>t = 1</th>
+                <td>U<sub>0</sub><sup>1</sup></td> <td>U<sub>1</sub><sup>1</sup></td> <td>...</td> <td>U<sub>1</sub><sup>1</sup></td> 
+            </tr>
+            <tr>
+                <th>...</th>
+                      <td>...</td>      <td>...</td>      <td>...</td>      <td>...</td>      <td>...</td>      <td>...</td>
+            </tr>
+            <tr>
+                <th>t = T</th>
+                <td>U<sub>0</sub><sup>T</sup></td> <td>U<sub>1</sub><sup>T</sup></td> <td>...</td> <td>U<sub>1</sub><sup>T</sup></td> 
+            </tr>
+        </table>
+  
+  
+
 
 
 <!-- USAGE EXAMPLES -->
