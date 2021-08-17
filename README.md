@@ -22,8 +22,8 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#Function Interface">Function Interface</a></li>
+    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -47,7 +47,7 @@ The major framework this project uses are Python, and its supplementary packages
 * [Numpy](https://numpy.org/)
 * [Matplotlib](https://matplotlib.org/)
 
-### Function Interface
+## Function Interface
 <!-- Function Interface -->
  The main function is called `grasscare_plot(S, labels, video, optional_params)`. It has following parameter:
   * S: A matrix of Grassmannian points:
