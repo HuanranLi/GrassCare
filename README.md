@@ -60,7 +60,7 @@ The major framework this project uses are Python, and its supplementary packages
   <table border="1">
   <tbody>
     <tr>
-      <td>U_0^0</td>
+      <td>U<sub>0<sup>0</td>
       <td>U_1^0</td>
       <td>U_2^0</td>
       <td>U_3^0</td>
