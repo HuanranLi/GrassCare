@@ -46,6 +46,43 @@ The major framework this project uses are Python, and its supplementary packages
 * [Numpy](https://numpy.org/)
 * [Matplotlib](https://matplotlib.org/)
 
+<!-- Function Interface -->
+ The main function is called `grasscare_plot(S, labels, video, optional_params)`. It has following parameter:
+  * S: A matrix of Grassmannian points:
+  <table border="1">
+  <thead>
+    <tr>
+      <th>Col 1</th>
+      <th>Col 2</th>
+      <th>Col 3</th>
+      <th colspan="3">Col 4</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Col 4.1</th>
+      <th>Col 4.2</th>
+      <th>Col 4.3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Val 1
+      </td>
+      <td>
+        Val 2
+      </td>
+      <td>
+        Val 3
+      </td>
+      <td>This is Val 4.1</td>
+      <td>This is Val 4.2</td>
+      <td>This is Val 4.3</td>
+    </tr>
+  </tbody>
+</table>
 
 
 <!-- USAGE EXAMPLES -->
