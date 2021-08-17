@@ -89,9 +89,9 @@ The major framework this project uses are Python, and its supplementary packages
               <th>Explanation</th>
             </tr>
             <tr>
-              <tr>video_tail</tr>
-              <tr>Int</tr>
-              <tr>The length of the tail drawn in the video. (input -1 if all tail points needed to be drawn)</tr>
+              <td>video_tail</td>
+              <td>Int</td>
+              <td>The length of the tail drawn in the video. (input -1 if all tail points needed to be drawn)</td>
             </tr>
             
         </table>
