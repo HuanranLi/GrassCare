@@ -146,7 +146,7 @@ See the [open issues](https://github.com/HuanranLi/Poincare-Embedded-Symmetric-S
 
 Huanran Li - [Website](https://huanranli.github.io/) - hli488@wisc.edu
 
-Project Link: [https://github.com/HuanranLi/Poincare-Embedded-Symmetric-SNE](https://github.com/HuanranLi/Poincare-Embedded-Symmetric-SNE)
+Project Link: [https://github.com/HuanranLi/GrassCare-Plot](https://github.com/HuanranLi/GrassCare-Plot)
 
 
 
