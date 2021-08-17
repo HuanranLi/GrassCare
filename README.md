@@ -89,17 +89,37 @@ The major framework this project uses are Python, and its supplementary packages
     <tr>
       <td>video_tail</td>
       <td>Int</td>
-      <td>The length of the tail drawn in the video. (input -1 if all tail points needed to be drawn)</td>
+      <td>The length of the tail drawn in the video. (input -1 if all tail points needed to be drawn). Default: -1</td>
     </tr>
     <tr>
       <td>b_array_init_syle</td>
       <td>{'PCA', 'random'}</td>
-      <td>Define how the initial low-dimensional points are created. 'PCA' would vectorize the Grassmannian matrix and do PCA.</td>
+      <td>Define how the initial low-dimensional points are created. 'PCA' would vectorize the Grassmannian matrix and do PCA. Default: 'random'</td>
     </tr>
      <tr>
-      <th>Name</th>
-      <th>Value Type</th>
-      <th>Explanation</th>
+      <td>max_epoch</td>
+      <td>int</td>
+      <td>The maximum of iteration for the optimization process. Default: 500</td>
+    </tr>
+     <tr>
+      <td>step_size</td>
+      <td>Float</td>
+      <td>The step size for the optimization process. Default: 1</td>
+    </tr>
+     <tr>
+      <td>objective_plot</td>
+      <td>Boolean</td>
+      <td>Plot the objective function at the end of optimization. Default: True</td>
+    </tr>     
+    <tr>
+      <td>Targets</td>
+      <td>np.ndarray([Matrices])</td>
+      <td>An array of targets points wanted to be drawn if available. Default: []</td>
+    </tr>
+    <tr>
+      <td>path_names</td>
+      <td>np.ndarray([Strings])</td>
+      <td>An array of names for each point, if a legend is wanted to be drawn. Mainly used for GROUSE. Default: []</td>
     </tr>
     </table>
   
