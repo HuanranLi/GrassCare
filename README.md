@@ -58,24 +58,6 @@ The major framework this project uses are Python, and its supplementary packages
  The main function is called `grasscare_plot(S, labels, video, optional_params)`. It has following parameter:
   * S: A matrix of Grassmannian points:
   <table border="1">
-  <thead>
-    <tr>
-      <th>U_0^0</th>
-      <th>U_1^0</th>
-      <th>U_2^0</th>
-      <th>U_3^0</th>
-      <th>...</th>
-      <th>U_N^0</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th>Col 4.1</th>
-      <th>Col 4.2</th>
-      <th>Col 4.3</th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
       <td>U_0^0</td>
@@ -84,6 +66,22 @@ The major framework this project uses are Python, and its supplementary packages
       <td>U_3^0</td>
       <td>...</td>
       <td>U_N^0</td>
+    </tr>
+    <tr>
+      <td>U_0^1</td>
+      <td>U_1^1</td>
+      <td>U_2^1</td>
+      <td>U_3^1</td>
+      <td>...</td>
+      <td>U_N^1</td>
+    </tr>
+     <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
   </tbody>
 </table>
