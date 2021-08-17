@@ -131,7 +131,7 @@ The major framework this project uses are Python, and its supplementary packages
 ### Demo
 * To find the best embedding for clusters' path, please refer [demo_clusterpath.py](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo_clusterpath.py). It can be run by: `python3 demo_clusterpath.py`
 * To find the best embedding for GROUSE routes, please refer [demo_GROUSE.py](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo_GROUSE.py). It can be run by: `python3 demo_GROUSE.py`
-* To see how the optimization process is done, please refer [demo_optimization](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo_optimization.py) It can be run by: `python3 demo_optimzation.py`
+* To see how the optimization process is done, please refer [demo_optimization](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo_optimization.py). It can be run by: `python3 demo_optimzation.py`
   
 <!-- ROADMAP -->
 ## Roadmap
