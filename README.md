@@ -22,8 +22,13 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li><a href="#function-interface">Function Interface</a></li>
     <li><a href="#usage">Usage</a></li>
+      <ul>
+           <li><a href="#function-interface">Function Interface</a></li>
+      </ul>
+      <ul>
+           <li><a href="#demo">Demo</a></li>
+      </ul>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -47,7 +52,8 @@ The major framework this project uses are Python, and its supplementary packages
 * [Numpy](https://numpy.org/)
 * [Matplotlib](https://matplotlib.org/)
 
-## Function Interface
+## Usage
+### Function Interface
 <!-- Function Interface -->
  The main function is called `grasscare_plot(S, labels, video, optional_params)`. It has following parameter:
   * S: A matrix of Grassmannian points:
@@ -88,7 +94,7 @@ The major framework this project uses are Python, and its supplementary packages
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+### Demo
 * To find the best embedding for clusters' path, please refer [demo_clusterpath.py](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo_clusterpath.py). It can be run by: `python3 demo_clusterpath.py`
 * To find the best embedding for GROUSE routes, please refer [demo_GROUSE.py](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo_GROUSE.py). It can be run by: `python3 demo_GROUSE.py`
 * To see how the optimization process is done, please refer [demo_optimization](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo_optimization.py) It can be run by: `python3 demo_optimzation.py`
