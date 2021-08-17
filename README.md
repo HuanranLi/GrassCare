@@ -55,7 +55,7 @@ The major framework this project uses are Python, and its supplementary packages
 ## Usage
 ### Function Interface
 <!-- Function Interface -->
- The main function is called `grasscare_plot(S, labels, video, optional_params = {})`. It has following parameter:
+ The main function is under [src/grasscare.py](https://github.com/HuanranLi/GrassCare-Plot/blob/main/src/grasscare.py), called `grasscare_plot(S, labels, video, optional_params = {})`. It has following parameter:
   * S: A matrix of Grassmannian points, where U_i^t means i'th Grassmannian point at time t.
   
     <table id="vertical-1">
