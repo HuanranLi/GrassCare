@@ -78,12 +78,12 @@ The major framework this project uses are Python, and its supplementary packages
   </thead>
   <tbody>
     <tr>
-      <tr>U_0^0</tr>
-      <tr>U_1^0</tr>
-      <tr>U_2^0</tr>
-      <tr>U_3^0</tr>
-      <tr>...</tr>
-      <tr>U_N^0</tr>
+      <td>U_0^0</td>
+      <td>U_1^0</td>
+      <td>U_2^0</td>
+      <td>U_3^0</td>
+      <td>...</td>
+      <td>U_N^0</td>
     </tr>
   </tbody>
 </table>
