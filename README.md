@@ -91,6 +91,16 @@ The major framework this project uses are Python, and its supplementary packages
       <td>Int</td>
       <td>The length of the tail drawn in the video. (input -1 if all tail points needed to be drawn)</td>
     </tr>
+    <tr>
+      <td>b_array_init_syle</td>
+      <td>{'PCA', 'random'}</td>
+      <td>Define how the initial low-dimensional points are created. 'PCA' would vectorize the Grassmannian matrix and do PCA.</td>
+    </tr>
+     <tr>
+      <th>Name</th>
+      <th>Value Type</th>
+      <th>Explanation</th>
+    </tr>
     </table>
   
   
