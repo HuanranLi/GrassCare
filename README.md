@@ -60,7 +60,6 @@ The major framework this project uses are Python, and its supplementary packages
   
    
     <table id="vertical-1">
-            <caption>S</caption>
             <tr>
                 <th>t = 0</th>
                 <td>U<sub>0</sub><sup>0</sup></td> <td>U<sub>1</sub><sup>0</sup></td> <td>...</td> <td>U<sub>1</sub><sup>0</sup></td> 
@@ -71,7 +70,7 @@ The major framework this project uses are Python, and its supplementary packages
             </tr>
             <tr>
                 <th>...</th>
-                      <td>...</td>      <td>...</td>      <td>...</td>      <td>...</td>      <td>...</td>      <td>...</td>
+                      <td>...</td>      <td>...</td>      <td>...</td>      <td>...</td>
             </tr>
             <tr>
                 <th>t = T</th>
