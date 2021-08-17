@@ -79,7 +79,7 @@ The major framework this project uses are Python, and its supplementary packages
   
   * labels: A np.ndarray with N elements where i'th entry corresponds to U_i'th label. Labels start index at 0.
   * video: True - Generate a video in gif format to display the path with shifting in time. If only one single time frame is contained in S, (i.e. T = 0), video will be generated to show its optimization path instead of clustering path.
-  * optional_params: It is default to be an empty dictionary. If no params are needed, just run `grasscare_plot(S, labels, video)`. Here are options for parameter:
+  * optional_params: It is default to be an empty dictionary. If no optional parameter is needed, just run `grasscare_plot(S, labels, video)`. Here are optional parameters:
     <table id="OPT">
     <tr>
       <th>Name</th>
