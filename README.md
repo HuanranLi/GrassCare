@@ -60,10 +60,12 @@ The major framework this project uses are Python, and its supplementary packages
   <table border="1">
   <thead>
     <tr>
-      <th>Col 1</th>
-      <th>Col 2</th>
-      <th>Col 3</th>
-      <th colspan="3">Col 4</th>
+      <th>U_0^0</th>
+      <th>U_1^0</th>
+      <th>U_2^0</th>
+      <th>U_3^0</th>
+      <th>...</th>
+      <th>U_N^0</th>
     </tr>
     <tr>
       <th></th>
@@ -76,18 +78,12 @@ The major framework this project uses are Python, and its supplementary packages
   </thead>
   <tbody>
     <tr>
-      <td>
-        Val 1
-      </td>
-      <td>
-        Val 2
-      </td>
-      <td>
-        Val 3
-      </td>
-      <td>This is Val 4.1</td>
-      <td>This is Val 4.2</td>
-      <td>This is Val 4.3</td>
+      <tr>U_0^0</tr>
+      <tr>U_1^0</tr>
+      <tr>U_2^0</tr>
+      <tr>U_3^0</tr>
+      <tr>...</tr>
+      <tr>U_N^0</tr>
     </tr>
   </tbody>
 </table>
