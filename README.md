@@ -40,7 +40,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 <BODY>
-  <IMG SRC="https://github.com/HuanranLi/Poincare-Embedded-Symmetric-SNE/blob/main/graphs/Poincare_Poincare_s-SNE.gif" width="512" height="512">
+  <IMG SRC="https://github.com/HuanranLi/GrassCare-Plot/blob/main/graph/Poincare_Poincare_s-SNE.gif" width="512" height="512">
 </BODY>
   
 This project provides a method similar to <a href = 'https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding'>t-SNE</a> for finding low-dimensional embedding for <a href = 'https://en.wikipedia.org/wiki/Grassmannian'>Grassmannian</a>. Instead of plotting it on to a 2-d plane, this algrithm manages to find the embedding on a 2-d <a href = 'https://en.wikipedia.org/wiki/Poincar%C3%A9_disk_model'>Poincar&eacute; Disk</a>, which is superior in representing points with hierarchical structures.
