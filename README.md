@@ -60,6 +60,13 @@ The major framework this project uses are Python, and its supplementary packages
   
     <table id="vertical-1">
             <tr>
+              <th></th>
+              <th>Subspace 1</th>
+              <th>Subspace 1</th>
+              <th>...</th>
+              <th>Subspace N</th>
+            </tr>
+            <tr>
                 <th>t = 0</th>
                 <td>U<sub>0</sub><sup>0</sup></td> <td>U<sub>1</sub><sup>0</sup></td> <td>...</td> <td>U<sub>1</sub><sup>0</sup></td> 
             </tr>
