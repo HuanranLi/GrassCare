@@ -5,7 +5,7 @@
 <p align="center">
 
 
-  <h3 align="center">Poincar&eacute; Embedded Symmetric SNE (PESSNE)</h3>
+  <h3 align="center">Poincar&eacute; Embedded Symmetric SNE (GrassCar&eacute)</h3>
 
 </p>
 
