@@ -68,11 +68,11 @@ The major framework this project uses are Python, and its supplementary packages
             </tr>
             <tr>
                 <th>t = 0</th>
-                <td>U<sub>0</sub><sup>0</sup></td> <td>U<sub>1</sub><sup>0</sup></td> <td>...</td> <td>U<sub>1</sub><sup>0</sup></td> 
+                <td>U<sub>0</sub><sup>0</sup></td> <td>U<sub>1</sub><sup>0</sup></td> <td>...</td> <td>U<sub>N</sub><sup>0</sup></td> 
             </tr>
             <tr>
                 <th>t = 1</th>
-                <td>U<sub>0</sub><sup>1</sup></td> <td>U<sub>1</sub><sup>1</sup></td> <td>...</td> <td>U<sub>1</sub><sup>1</sup></td> 
+                <td>U<sub>0</sub><sup>1</sup></td> <td>U<sub>1</sub><sup>1</sup></td> <td>...</td> <td>U<sub>N</sub><sup>1</sup></td> 
             </tr>
             <tr>
                 <th>...</th>
@@ -80,7 +80,7 @@ The major framework this project uses are Python, and its supplementary packages
             </tr>
             <tr>
                 <th>t = T</th>
-                <td>U<sub>0</sub><sup>T</sup></td> <td>U<sub>1</sub><sup>T</sup></td> <td>...</td> <td>U<sub>1</sub><sup>T</sup></td> 
+                <td>U<sub>0</sub><sup>T</sup></td> <td>U<sub>1</sub><sup>T</sup></td> <td>...</td> <td>U<sub>N</sub><sup>T</sup></td> 
             </tr>
         </table>
   
