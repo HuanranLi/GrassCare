@@ -29,11 +29,12 @@ def main():
 
     S, labels, centers = U_array_init(ambient_dimension = m, rank = r, count = N, clusters = K)
 
+    optional_params = {'video_tail': 5}
     #visualizing Us
     if m == 3 and r == 1:
         plot_U_array(S, labels = labels, title = 'Initialization')
 
-    embedding = grasscare_plot(S = S, labels = labels, video = True)
+    embedding = grasscare_plot(S = S, labels = labels, video = True, optional_params = optional_params)
 
 
 
