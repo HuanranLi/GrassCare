@@ -190,7 +190,7 @@ def plot_b_array_path(b_array, #data
                 index = step + targets_count + path_index * path_length
                 plt.scatter(x[index], y[index], c = [cmap(labels_normalized[path_index])], s = 10)
 
-                if tail > 0:
+                if tail >= 0:
                     start = step + targets_count + path_index * path_length - tail
                 if tail == -1:
                     start = targets_count + path_index * path_length
