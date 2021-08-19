@@ -26,6 +26,7 @@ def main():
     clusters = K = 3
 
     S, labels, optional_params = demo_init(m, r, N, K)
+    optional_params['video_tail'] = 5
 
     embedding = grasscare_plot(S = S, labels = labels, video = True, optional_params = optional_params)
 
