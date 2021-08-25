@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='GrassCare_Plot',
+    name='GrassCarePlot',
     version='1.0.0',
     url='https://github.com/HuanranLi/GrassCare-Plot',
     author='Huanran Li',
