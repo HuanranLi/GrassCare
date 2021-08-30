@@ -135,12 +135,23 @@ def del_d_p(p_i, p_j, method = 'Euclidean'):
 Calculate the distance matrix on the 2-d Embedding
 '''
 def dist_b_array(b_array, method):
-    K = b_array.shape[0]
+    N = b_array.shape[0]
 
-    dist_mat = np.zeros((K,K))
-    for i in range(K):
-        for j in range(i,K):
+    dist_mat = np.zeros((N,N))
+    for i in range(N):
+        for j in range(i,N):
             dist_mat[i,j] = d_p(b_array[i], b_array[j], method = method)
+            dist_mat[j,i] = dist_mat[i,j]
+
+    return dist_mat
+    
+def dist_U_array(U_array):
+    N = U_array.shape[0]
+
+    dist_mat = np.zeros((N,N))
+    for i in range(N):
+        for j in range(i,N):
+            dist_mat[i,j] = d_G(U_array[i], U_array[j])
             dist_mat[j,i] = dist_mat[i,j]
 
     return dist_mat
