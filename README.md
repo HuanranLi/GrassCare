@@ -133,6 +133,11 @@ The major framework this project uses are Python, and its supplementary packages
       <td>Boolean</td>
       <td>True if running the program in Google Colab. The tool used for printing the update for each iteration is different. Default: False</td>
     </tr>
+    <tr>
+      <td>final_picture</td>
+      <td>Boolean</td>
+      <td>True if user want the final picture of the gif. Default: True</td>
+    </tr>
     </table>
   
   

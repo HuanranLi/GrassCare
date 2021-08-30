@@ -80,6 +80,11 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         GoogleColab = False
     else:
         GoogleColab = optional_params['GoogleColab']
+        
+    if 'final_picture' not in optional_params:
+        final_picture = True
+    else:
+        final_picture = optional_params['final_picture']
 
 
 
@@ -125,12 +130,13 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                         video_tail = video_tail,
                         google_colab = GoogleColab)
 
-
-        plot_b_array(new_b_array,
-                save = True,
-                title = 'Grasscare',
-                format = 'pdf',
-                color_map= c_array)
+        
+        if final_picture:
+            plot_b_array(new_b_array,
+                    save = True,
+                    title = 'Grasscare',
+                    format = 'pdf',
+                    color_map= c_array)
 
         if video:
             plot_b_array(new_b_array,
@@ -189,8 +195,9 @@ def grasscare_plot(S, labels, video, optional_params = {}):
             path_names = optional_params['path_names']
         else:
             path_names = []
-
-        plot_b_array_path(b_array = new_b_array,
+        
+        if final_picture:
+            plot_b_array_path(b_array = new_b_array,
                             labels = labels,
                             paths_count = U_array.shape[1],
                             path_length = U_array.shape[0],
