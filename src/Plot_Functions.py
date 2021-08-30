@@ -101,7 +101,7 @@ def plot_b_array_path(b_array, #data
                 path_names = [],
                 title = None, #the title of the graph
                 save = False, #save the graph if true
-                plot = True, #show the graph if true
+                plot = False, #show the graph if true
                 format = 'png', #format of graph: png, pdf, eps
                 tail = 0
                 ) :
@@ -150,8 +150,11 @@ def plot_b_array_path(b_array, #data
 
     if title:
         plt.title(title)
-
+    
     plt.savefig('Grasscare.pdf',pad_inches=0, format = 'pdf')
+    
+    if plot:
+        plt.show()
     plt.close(fig)
 
 
