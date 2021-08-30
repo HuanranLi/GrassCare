@@ -138,6 +138,11 @@ The major framework this project uses are Python, and its supplementary packages
       <td>Boolean</td>
       <td>True if user want the final picture of the gif. Default: True</td>
     </tr>
+    <tr>
+      <td>no_graph</td>
+      <td>Boolean</td>
+      <td>True if user does not want to generate any graphs. It will be used if only the embedding is needed. Default: False</td>
+    </tr>
     </table>
   
   

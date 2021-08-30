@@ -85,6 +85,12 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         final_picture = False
     else:
         final_picture = optional_params['final_picture']
+        
+        
+    if 'no_graph' not in optional_params:
+        no_graph = False
+    else:
+        no_graph = optional_params['no_graph']
 
 
 
@@ -100,7 +106,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         c_array = [cmap(i / max(labels)) for i in labels]
 
         #name for the video
-        if video:
+        if video and not no_graph:
             print('\nNote: Optimization video will be generated instead of path video!')
             gif_output = 'Optimization_Process.gif'
         else:
@@ -131,15 +137,15 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                         google_colab = GoogleColab)
 
         
-        
-        plot_b_array(new_b_array,
+        if not no_graph:
+            plot_b_array(new_b_array,
                     save = True,
                     title = 'Grasscare',
                     format = 'pdf',
                     color_map= c_array,
                     plot = final_picture)
 
-        if video:
+        if video and not no_graph:
             plot_b_array(new_b_array,
                 save = True,
                 title = 'Optimization_Process',
@@ -197,8 +203,9 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         else:
             path_names = []
         
-
-        plot_b_array_path(b_array = new_b_array,
+           
+        if not no_graph:
+            plot_b_array_path(b_array = new_b_array,
                             labels = labels,
                             paths_count = U_array.shape[1],
                             path_length = U_array.shape[0],
@@ -218,8 +225,9 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         b_array = np.zeros((U_array.shape[0],U_array.shape[1],2))
         for col in range(U_array.shape[1]):
             b_array[:,col] = new_b_array[targets_count + col * U_array.shape[0] : targets_count + (col+1) * U_array.shape[0]]
-
-        clean_up()
+        
+        if not no_graph:
+            clean_up()
         
         return b_array
 
