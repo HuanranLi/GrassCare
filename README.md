@@ -130,7 +130,7 @@ The major framework this project uses are Python, and its supplementary packages
     </tr>
     <tr>
       <td>GoogleColab</td>
-      <td>Boolean([Strings])</td>
+      <td>Boolean</td>
       <td>True if running the program in Google Colab. The tool used for printing the update for each iteration is different. Default: False</td>
     </tr>
     </table>
