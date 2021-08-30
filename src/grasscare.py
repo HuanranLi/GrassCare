@@ -74,6 +74,12 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         video_tail = -1
     else:
         video_tail = optional_params['video_tail']
+		
+	#optional parameter for printing tools at GoogleColab
+    if 'GoogleColab' not in optional_params:
+        GoogleColab = False
+    else:
+        GoogleColab = optional_params['GoogleColab']
 
 
 
@@ -116,7 +122,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                         obj_plot = objective_plot,
                         b_array_path = True,
                         gif_output = gif_output,
-                        video_tail = video_tail)
+                        video_tail = video_tail,
+						google_colab = GoogleColab)
 
 
         plot_b_array(new_b_array,
@@ -192,7 +199,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                             save = True,
                             format = 'pdf',
                             tail = video_tail,
-                            path_names = path_names
+                            path_names = path_names,
+							GoogleColab = google_colab
                             )
 
 
@@ -227,7 +235,8 @@ def grasscare_train(arrays_dict, #data
             obj_plot = True, #plot the objective values in the end of training
             printing_update = True, #update of objective values during the training
             b_array_path = False, #save all b_array intermediate values during the training, will be returned in info['b_array_path']
-            video_tail = 2):
+            video_tail = 2,
+			google_colab = False):
 
     np.seterr(divide = 'ignore')
 
@@ -237,8 +246,10 @@ def grasscare_train(arrays_dict, #data
 
     ############################################################################
     if printing_update:
-        #out = display(IPython.display.Pretty('Starting'), display_id=True)
-        print('Starting', end = '\r')
+        if google_colab:
+            out = display(IPython.display.Pretty('Starting'), display_id=True)
+        else:
+            print('Starting', end = '\r')
 
 
     U_array = arrays_dict['U_array']
@@ -363,12 +374,16 @@ def grasscare_train(arrays_dict, #data
 
         if printing_update:
             string = "Iter: " + str(iter) + ', Obj: ' + str(obj_record[-1]) + ', eta: ' + str(eta) + '                  '
-            #out.update(IPython.display.Pretty(string))
-            print(string, end = '\r')
+            if google_colab:
+                out.update(IPython.display.Pretty(string))
+            else:
+                print(string, end = '\r')
 
     if printing_update:
-        #out.update(IPython.display.Pretty('Done'))
-        print('Done', end = '\r')
+        if google_colab:
+            out.update(IPython.display.Pretty('Done'))
+        else:
+            print('Done', end = '\r')
 
     print('Final OBJ:',obj)
     info['obj'] = obj
