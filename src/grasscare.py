@@ -123,7 +123,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                         b_array_path = True,
                         gif_output = gif_output,
                         video_tail = video_tail,
-						google_colab = GoogleColab)
+                        google_colab = GoogleColab)
 
 
         plot_b_array(new_b_array,
@@ -177,7 +177,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                         eta = step_size,
                         beta = beta,
                         cost_func = cost_function,
-                        obj_plot = objective_plot)
+                        obj_plot = objective_plot,
+						google_colab = GoogleColab)
 
         if 'Targets' in optional_params:
             targets_count = len(optional_params['Targets'])
@@ -199,8 +200,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                             save = True,
                             format = 'pdf',
                             tail = video_tail,
-                            path_names = path_names,
-							GoogleColab = google_colab
+                            path_names = path_names
                             )
 
 
