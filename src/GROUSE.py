@@ -23,7 +23,7 @@ def ls_solution(U, v, Omega):
 '''
 GROUSE gradient descent for 1 step
 '''
-def GROUSE_gradient_descent(U, v, Omega, eta = 1):
+def GROUSE_gradient_descent(U, v, Omega, eta):
 
     w = ls_solution(U, v, Omega)
     #print(w.shape)
@@ -41,7 +41,7 @@ def GROUSE_gradient_descent(U, v, Omega, eta = 1):
 '''
 Main process for GROUSE, responsible for calling gradient descent
 '''
-def GROUSE(GROUSE_dict, max_iter = 100):
+def GROUSE(GROUSE_dict, max_iter = 100, eta = 1):
     U = GROUSE_dict['U_0']
     v_array = GROUSE_dict['v_array']
     Omega_array = GROUSE_dict['Omega_array']
@@ -55,7 +55,7 @@ def GROUSE(GROUSE_dict, max_iter = 100):
             v_t = v_array[t]
             Omega_t = Omega_array[t]
 
-            U = GROUSE_gradient_descent(U = U, v = v_t, Omega = Omega_t)
+            U = GROUSE_gradient_descent(U = U, v = v_t, Omega = Omega_t, eta = eta)
 
             U_record.append(U.copy())
 

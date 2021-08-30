@@ -54,7 +54,7 @@ def GROUSE_demo_init(m, r, n_K, missing_percentages):
             GROUSE_dict = GROUSE_init(U_array, missing_percentage = missing_percentages[i], observed_vectors = n_K,
                                         U_0 = GROUSE_paths[0][0], U_0_load = True)
 
-        GROUSE_paths.append(GROUSE(GROUSE_dict, max_iter = 1))
+        GROUSE_paths.append(GROUSE(GROUSE_dict, max_iter = 1, eta = 1))
 
         print('missing Percentage:', missing_percentages[i])
         print('\tDistance(U*, U_t) = ', d_G(U_array[0], GROUSE_paths[-1][-1]))
