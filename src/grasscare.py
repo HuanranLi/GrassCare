@@ -246,6 +246,7 @@ def grasscare_train(arrays_dict, #data
 
     ############################################################################
     if printing_update:
+        print(google_colab)
         if google_colab:
             print('GoogleColab Printing Mode: On')
             out = display(IPython.display.Pretty('Starting'), display_id=True)
