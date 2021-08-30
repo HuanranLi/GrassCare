@@ -128,6 +128,11 @@ The major framework this project uses are Python, and its supplementary packages
       <td>np.ndarray([Strings])</td>
       <td>An array of names for each point, if a legend is wanted to be drawn. Mainly used for GROUSE. Default: []</td>
     </tr>
+    <tr>
+      <td>GoogleColab</td>
+      <td>Boolean([Strings])</td>
+      <td>True if running the program in Google Colab. The tool used for printing the update for each iteration is different. Default: False</td>
+    </tr>
     </table>
   
   
