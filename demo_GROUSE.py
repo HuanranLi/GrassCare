@@ -29,7 +29,7 @@ def main():
     S, labels, optional_params = GROUSE_demo_init(m, r, n_K, missing_percentages)
 
     #optional_params['video_tail'] = 20
-    embedding = grasscare_plot(S = S, labels = labels, video = True, optional_params = optional_params)
+    embedding, info = grasscare_plot(S = S, labels = labels, video = True, optional_params = optional_params)
 
     #print(embedding)
     #print(embedding.shape)

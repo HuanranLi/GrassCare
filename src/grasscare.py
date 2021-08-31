@@ -156,7 +156,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
 
 
         clean_up()
-        return new_b_array
+        return new_b_array, info
 
     ############################################################
     # Part 2: Multiple Time Frame Plotting
@@ -229,7 +229,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         if not no_graph:
             clean_up()
         
-        return b_array
+        return b_array, info
 
 
 
