@@ -17,7 +17,7 @@ from Initialization import *
 def grasscare_plot(S, labels, video, optional_params = {}):
 
 
-    print('\n######################### Grasscare 1.1.2 #########################')
+    print('\n######################### Grasscare 1.1.3 #########################')
 
     U_array = S
 
@@ -228,6 +228,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         
         if not no_graph:
             clean_up()
+            
+        print('\n######################### Grasscare END #########################')
         
         return b_array, info
 
@@ -399,11 +401,11 @@ def grasscare_train(arrays_dict, #data
 
     if printing_update:
         if google_colab:
-            out.update(IPython.display.Pretty('Done'))
+            out.update(IPython.display.Pretty('Found the optimizer with ' + iter + 'iterations!'))
         else:
-            print('Done', end = '\r')
+            print('Found the optimizer with ' + iter + 'iterations!')
 
-    print('Final OBJ:',obj)
+    print('Optimum Objective:',obj)
     info['obj'] = obj
 
     if obj_plot:
