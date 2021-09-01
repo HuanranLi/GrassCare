@@ -401,9 +401,9 @@ def grasscare_train(arrays_dict, #data
 
     if printing_update:
         if google_colab:
-            out.update(IPython.display.Pretty('Found the optimizer with ' + iter + 'iterations!'))
+            out.update(IPython.display.Pretty('Found the optimizer with ' + str(iter) + 'iterations!'))
         else:
-            print('Found the optimizer with ' + iter + 'iterations!')
+            print('Found the optimizer with ' + str(iter) + 'iterations!')
 
     print('Optimum Objective:',obj)
     info['obj'] = obj
