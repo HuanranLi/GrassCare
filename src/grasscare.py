@@ -18,7 +18,7 @@ from GROUSE import *
 def grasscare_plot(S, labels, video, optional_params = {}):
 
 
-    print('\n######################### Grasscare 1.1.3 #########################')
+    print('\n######################### Grasscare 1.1.4 #########################')
 
     U_array = S
 
@@ -159,7 +159,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         clean_up()
         
         
-        print('\n######################### Grasscare END #########################')
+        print('######################### Grasscare END ###########################')
         
         return new_b_array, info
 
@@ -234,7 +234,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         if not no_graph:
             clean_up()
             
-        print('\n######################### Grasscare END #########################')
+        print('######################### Grasscare END ###########################')
         
         return b_array, info
 
