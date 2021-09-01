@@ -195,7 +195,7 @@ def plot_b_array_path(b_array, #data
 
                 if tail == 0:
                     start = step + targets_count + path_index * path_length
-                elif tail < step:
+                elif tail < step and tail != -1:
                     start = step + targets_count + path_index * path_length - tail
                 else:
                     start = targets_count + path_index * path_length
