@@ -159,7 +159,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         clean_up()
         
         
-        print('######################### Grasscare END ###########################')
+        print('######################### Grasscare END ###########################\n')
         
         return new_b_array, info
 
@@ -234,7 +234,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         if not no_graph:
             clean_up()
             
-        print('######################### Grasscare END ###########################')
+        print('######################### Grasscare END ###########################\n')
         
         return b_array, info
 
@@ -406,9 +406,9 @@ def grasscare_train(arrays_dict, #data
 
     if printing_update:
         if google_colab:
-            out.update(IPython.display.Pretty('Found the optimizer with ' + str(iter) + 'iterations!'))
+            out.update(IPython.display.Pretty('Found the optimizer with ' + str(iter) + ' iterations!     '))
         else:
-            print('Found the optimizer with ' + str(iter) + ' iterations!')
+            print('Found the optimizer with ' + str(iter) + ' iterations!         ')
 
     print('Optimum Objective:',obj)
     info['obj'] = obj
