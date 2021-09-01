@@ -282,7 +282,7 @@ def L_obj(P_Ball_mat, P_Gr_mat, cost_func):
 
     if cost_func == 't-SNE' or cost_func == 's-SNE' or cost_func == 'p-SNE':
         sum = 0
-        mat = np.log(np.divide(filled_P_Gr_mat, filled_P_Ball_mat))
+        mat = np.log(np.divide(1, filled_P_Ball_mat))
         mat = np.multiply(mat, P_Gr_mat)
         sum += np.sum(mat)
 

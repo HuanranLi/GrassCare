@@ -17,7 +17,7 @@ from Initialization import *
 def grasscare_plot(S, labels, video, optional_params = {}):
 
 
-    print('\n######################### Grasscare 1.1.1 #########################')
+    print('\n######################### Grasscare 1.1.2 #########################')
 
     U_array = S
 
