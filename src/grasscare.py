@@ -99,7 +99,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         min_value_gain = optional_params['min_value_gain']
         
     if 'min_eta' not in optional_params:
-        min_eta = 1e-5:
+        min_eta = 1e-5
     else:
         min_eta = optional_params['min_eta']
 
