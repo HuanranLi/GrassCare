@@ -18,7 +18,7 @@ from GROUSE import *
 def grasscare_plot(S, labels, video, optional_params = {}):
 
 
-    print('\n######################### Grasscare 1.1.4 #########################')
+    print('\n######################### Grasscare 1.1.5 #########################')
 
     U_array = S
 
@@ -92,6 +92,16 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         no_graph = False
     else:
         no_graph = optional_params['no_graph']
+        
+    if 'min_value_gain' not in optional_params:
+        min_value_gain = 1e-5
+    else:
+        min_value_gain = optional_params['min_value_gain']
+        
+    if 'min_eta' not in optional_params:
+        min_eta = 1e-5:
+    else:
+        min_eta = optional_params['min_eta']
 
 
 
@@ -135,7 +145,9 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                         b_array_path = True,
                         gif_output = gif_output,
                         video_tail = video_tail,
-                        google_colab = GoogleColab)
+                        google_colab = GoogleColab,
+                        min_value_gain = min_value_gain,
+                        min_eta = min_eta)
 
         
         if not no_graph:
@@ -196,7 +208,9 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                         beta = beta,
                         cost_func = cost_function,
                         obj_plot = objective_plot,
-						google_colab = GoogleColab)
+						google_colab = GoogleColab,
+                        min_value_gain = min_value_gain,
+                        min_eta = min_eta)
 
         if 'Targets' in optional_params:
             targets_count = len(optional_params['Targets'])
@@ -260,7 +274,9 @@ def grasscare_train(arrays_dict, #data
             printing_update = True, #update of objective values during the training
             b_array_path = False, #save all b_array intermediate values during the training, will be returned in info['b_array_path']
             video_tail = 2,
-			google_colab = False):
+			google_colab = False,
+            min_value_gain = 1e-5,
+            min_eta = 1e-5):
 
     np.seterr(divide = 'ignore')
 
@@ -381,8 +397,9 @@ def grasscare_train(arrays_dict, #data
                     P_Gr_mat = P_Gr_mat,
                     cost_func = cost_func)
 
-
-        if abs(obj - obj_record[-1]) < 1e-5 :
+        if obj > obj_record[-1]:
+            eta /= 2
+        if abs(obj - obj_record[-1]) < min_value_gain or eta < min_eta:
             info['iter'] = iter
             break
         else:
