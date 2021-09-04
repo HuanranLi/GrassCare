@@ -454,3 +454,73 @@ def clean_up():
     for f in allfiles:
         if ('pdf' in f) or ('png' in f) or ('eps' in f) or ('gif' in f):
             shutil.move(f, folder_name + '/' + f)
+
+
+'''
+Provide a estimate upper Bound
+'''
+def upperBound(S, labels, beta = 1):
+    t = len(S.shape) - 2
+    if t > 1:
+        raise Exception('Only a single time frame should be contained in S.')
+    N = S.shape[0]
+    K = max(labels) + 1
+    nk = N // K
+
+    D = N * (nk - 1) + N * (N - nk) * np.exp(-1 * np.arccosh(1 + 2*np.sin(np.pi/K)/(0.75**2) )**2 / beta)
+    
+    U_dist_mat = dist_U_array(S)
+    d = 0
+    c = np.inf
+    ind_mat = np.zeros(U_dist_mat.shape)
+    for i in range(K):
+        sub_ind = labels == i 
+        
+        for row in range(N):
+            if sub_ind[row]:        
+                ind_mat[row, sub_ind] = 1
+
+    for i in range(N):
+        for j in range(N):
+            if ind_mat[i,j] == 1:
+                d = max(d, U_dist_mat[i,j])
+            else:
+                c = min(c, U_dist_mat[i,j])
+    
+    print('min_distance = ', c)
+    gamma_array = np.zeros(N)
+    for row in range(N):
+        gamma_array[row] = np.std(U_dist_mat[row,:])
+
+    print('max_std = ', max(gamma_array))
+    c = c / np.sqrt(2) / max(gamma_array)
+
+
+    P_Gr_mat = P_Gr(U_array = S, cost_func = 's-SNE')
+    P_Gr_mat_nonzero = P_Gr_mat.copy()
+    P_Gr_mat_nonzero[P_Gr_mat == 0] = 0.1
+
+    bound = 0
+    #bound += np.sum(P_Gr_mat * np.log(P_Gr_mat_nonzero)) 
+
+    for i in range(N):
+        for j in range(N):
+            if ind_mat[i,j] == 1:
+                #bound += P_Gr_mat[i,j]*np.log(D)
+                #bound += np.exp(d) / (K * (nk - 1)) * np.log(D)
+                continue
+            else:
+                #bound += P_Gr_mat[i,j]* ( 2.2**2/beta + np.log(D))
+                #bound += P_Gr_mat[i,j]* ( 2.2**2/beta)
+                #bound += np.exp(d-c**2) / (K * (nk - 1)) * ( 2.2**2/beta + np.log(D))
+                continue
+
+    
+    bound += np.log(D)
+    #bound += (N - nk) * np.exp(d-c**2) / (nk-1)*  (2.2**2)/beta 
+    bound += 2 * K * np.exp(d-c**2) *  (2.2**2)/beta 
+
+    print('d = ', d)
+    print('c = ', c)
+    print('c^2 = ', c**2)
+    return bound, d - c**2
