@@ -458,8 +458,9 @@ def clean_up():
 
 '''
 Provide a estimate upper Bound
-
+'''
 def upperBound(S, labels, beta = 1):
+    labels = np.array(labels)
     t = len(S.shape) - 2
     if t > 1:
         raise Exception('Only a single time frame should be contained in S.')
@@ -525,4 +526,3 @@ def upperBound(S, labels, beta = 1):
     print('c^2 = ', c**2)
     return bound, d - c**2
 
-'''
