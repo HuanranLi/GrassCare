@@ -458,7 +458,7 @@ def clean_up():
 
 '''
 Provide a estimate upper Bound
-'''
+
 def upperBound(S, labels, beta = 1):
     t = len(S.shape) - 2
     if t > 1:
@@ -524,3 +524,5 @@ def upperBound(S, labels, beta = 1):
     print('c = ', c)
     print('c^2 = ', c**2)
     return bound, d - c**2
+
+'''
