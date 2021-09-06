@@ -108,7 +108,10 @@ def grasscare_plot(S, labels, video, optional_params = {}):
     else:
         output_folder = optional_params['output_folder']
 
-
+    if 'folder_path' not in optional_params:
+        folder_path = ''
+    else:
+        folder_path = optional_params['folder_path']
 
     ############################################################
     # Part 1: Single Time Frame Plotting
@@ -174,7 +177,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
 
 
         if not no_graph:
-            clean_up(output_folder)
+            clean_up(output_folder, folder_path = folder_path)
 
 
         print('######################### Grasscare END ###########################\n')
@@ -252,7 +255,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
             b_array[:,col] = new_b_array[targets_count + col * U_array.shape[0] : targets_count + (col+1) * U_array.shape[0]]
 
         if not no_graph:
-            clean_up(output_folder)
+            clean_up(output_folder, folder_path = folder_path)
 
         print('######################### Grasscare END ###########################\n')
 
@@ -452,16 +455,17 @@ def grasscare_train(arrays_dict, #data
 '''
 After training, creating a folder with current date and time, move all generated graphs into the folder.
 '''
-def clean_up(folder_name):
+def clean_up(folder_name, folder_path = ''):
     if folder_name == 'Time':
         folder_name = datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '_results'
 
-    os.mkdir(folder_name)
+    os.mkdir(folder_path + folder_name)
+    path = folder_path + folder_name + '/'
 
     allfiles = os.listdir('./')
     for f in allfiles:
         if ('pdf' in f) or ('png' in f) or ('eps' in f) or ('gif' in f):
-            shutil.move(f, folder_name + '/' + f)
+            shutil.move(f, path + f)
 
 
 '''
