@@ -103,10 +103,10 @@ def grasscare_plot(S, labels, video, optional_params = {}):
     else:
         min_eta = optional_params['min_eta']
 
-    if 'output_folder' not in optional_params:
-        output_folder = 'Time'
+    if 'folder_name' not in optional_params:
+        folder_name = 'Time'
     else:
-        output_folder = optional_params['output_folder']
+        folder_name = optional_params['folder_name']
 
     if 'folder_path' not in optional_params:
         folder_path = ''
