@@ -172,6 +172,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                 title = 'Optimization_Process',
                 format = 'pdf',
                 color_map= c_array,
+                plot = final_picture,
                 tail = -1,
                 b_array_path = info['b_array_path'])
 
