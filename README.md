@@ -42,7 +42,7 @@
 <BODY>
   <IMG SRC="https://github.com/HuanranLi/GrassCare-Plot/blob/main/graph/Optimization%20Process.gif" width="512" height="512">
 </BODY>
-  
+
 This project provides a method similar to <a href = 'https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding'>t-SNE</a> for finding low-dimensional embedding for <a href = 'https://en.wikipedia.org/wiki/Grassmannian'>Grassmannian</a>. Instead of plotting it on to a 2-d plane, this algrithm manages to find the embedding on a 2-d <a href = 'https://en.wikipedia.org/wiki/Poincar%C3%A9_disk_model'>Poincar&eacute; Disk</a>, which is superior in representing points with hierarchical structures.
 
 ### Built With
@@ -57,7 +57,7 @@ The major framework this project uses are Python, and its supplementary packages
 <!-- Function Interface -->
  The main function is under [src/grasscare.py](https://github.com/HuanranLi/GrassCare-Plot/blob/main/src/grasscare.py), called `grasscare_plot(S, labels, video, optional_params = {})`. An embedding will be calculated and returned in the same format as the input array S. A graph will be plotted containing all the points with the new embedding. It has following parameters:
   * S: A matrix of Grassmannian points, where U_i^t means i'th Grassmannian point at time t.
-  
+
     <table id="vertical-1">
             <tr>
               <th></th>
@@ -68,11 +68,11 @@ The major framework this project uses are Python, and its supplementary packages
             </tr>
             <tr>
                 <th>t = 0</th>
-                <td>U<sub>0</sub><sup>0</sup></td> <td>U<sub>1</sub><sup>0</sup></td> <td>...</td> <td>U<sub>N</sub><sup>0</sup></td> 
+                <td>U<sub>0</sub><sup>0</sup></td> <td>U<sub>1</sub><sup>0</sup></td> <td>...</td> <td>U<sub>N</sub><sup>0</sup></td>
             </tr>
             <tr>
                 <th>t = 1</th>
-                <td>U<sub>0</sub><sup>1</sup></td> <td>U<sub>1</sub><sup>1</sup></td> <td>...</td> <td>U<sub>N</sub><sup>1</sup></td> 
+                <td>U<sub>0</sub><sup>1</sup></td> <td>U<sub>1</sub><sup>1</sup></td> <td>...</td> <td>U<sub>N</sub><sup>1</sup></td>
             </tr>
             <tr>
                 <th>...</th>
@@ -80,10 +80,10 @@ The major framework this project uses are Python, and its supplementary packages
             </tr>
             <tr>
                 <th>t = T</th>
-                <td>U<sub>0</sub><sup>T</sup></td> <td>U<sub>1</sub><sup>T</sup></td> <td>...</td> <td>U<sub>N</sub><sup>T</sup></td> 
+                <td>U<sub>0</sub><sup>T</sup></td> <td>U<sub>1</sub><sup>T</sup></td> <td>...</td> <td>U<sub>N</sub><sup>T</sup></td>
             </tr>
         </table>
-  
+
   * labels: A np.ndarray with N elements where i'th entry corresponds to U_i'th label. Labels start index at 0.
   * video: True - Generate a video in gif format to display the path with shifting in time. If only one single time frame is contained in S, (i.e. T = 0), video will be generated to show its optimization path instead of clustering path.
   * optional_params: It is default to be an empty dictionary. If no optional parameter is needed, just run `grasscare_plot(S, labels, video)`. Here are optional parameters:
@@ -143,9 +143,21 @@ The major framework this project uses are Python, and its supplementary packages
       <td>Boolean</td>
       <td>True if user does not want to generate any graphs. It will be used if only the embedding is needed. Default: False</td>
     </tr>
+    <tr>
+      <td>folder_path</td>
+      <td>String</td>
+      <td>The path that the user want the result folder to be created in. Default: './'</td>
+    </tr>
+    <tr>
+      <td>folder_name</td>
+      <td>String</td>
+      <td>The name of the folder that will be created for the result. Default: Current Time (ie. '2021-09-06_18-56-50_results')</td>
+    </tr>
+
     </table>
-  
-  
+
+
+
 
 
 
@@ -155,7 +167,7 @@ The major framework this project uses are Python, and its supplementary packages
 * To find the best embedding for GROUSE routes, please refer [demo_GROUSE.py](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo/demo_GROUSE.py). It can be run by: `python3 demo_GROUSE.py`
 * To see how the optimization process is done, please refer [demo_optimization](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo/demo_optimization.py). It can be run by: `python3 demo_optimzation.py`
 * Notebook version is also available for finding the best embedding for clusters' path, please refer [Notebook_demo.ipynb](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo/Notebook_demo.ipynb).
-  
+
 <!-- ROADMAP -->
 ## Roadmap
 
@@ -170,7 +182,3 @@ See the [open issues](https://github.com/HuanranLi/Poincare-Embedded-Symmetric-S
 Huanran Li - [Website](https://huanranli.github.io/) - hli488@wisc.edu
 
 Project Link: [https://github.com/HuanranLi/GrassCare-Plot](https://github.com/HuanranLi/GrassCare-Plot)
-
-
-
-
