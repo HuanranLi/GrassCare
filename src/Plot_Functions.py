@@ -299,7 +299,7 @@ def plot_b_array(b_array, #data
     if title:
         plt.title(title)
 
-    if len(labels > 0):
+    if len(labels) > 0:
         plt.legend()
 
     if save and format == 'png':
