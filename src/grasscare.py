@@ -173,7 +173,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                 b_array_path = info['b_array_path'])
 
 
-        clean_up()
+        if not no_graph:
+            clean_up(output_folder)
 
 
         print('######################### Grasscare END ###########################\n')
