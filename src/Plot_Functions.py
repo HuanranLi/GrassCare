@@ -269,7 +269,8 @@ def plot_b_array(b_array, #data
 
     if len(labels) > 0:
         for l in list(set(labels)):
-            plt.scatter(x[list(labels).index(l)], y[list(labels).index(l)], label = 'Cluster str(l)', s = 0.001)
+            index = list(labels).index(l)
+            plt.scatter(x[index], y[index], label = 'Cluster ' + str(l)', s = 10, c = color_map[index])
 
 
     try:
