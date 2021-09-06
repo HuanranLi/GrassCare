@@ -150,9 +150,9 @@ def plot_b_array_path(b_array, #data
 
     if title:
         plt.title(title)
-    
+
     plt.savefig('Grasscare.pdf',pad_inches=0, format = 'pdf')
-    
+
     if plot:
         plt.show()
     plt.close(fig)
@@ -232,7 +232,7 @@ def plot_b_array(b_array, #data
                 GROUSE_mode = False, #plot GROUSE graphs
                 v_count = -1, #parameter for GROUSE.
                 geodesic_steps = 0, #paramter for GROUSE
-                labels = ['0% missing','33% missing','66% missing' ], #labeling for GROUSE
+                labels = [],
                 tail = 0,
                 b_array_path = None) :
 
@@ -267,6 +267,11 @@ def plot_b_array(b_array, #data
 
     plt.scatter(x,y, c = color_map, s = 10)
 
+    if len(labels) > 0:
+        for l in list(set(labels)):
+            plt.scatter(x[labels.index(l)], y[labels.index(l)], label = 'Cluster str(l)', s = 0.001)
+
+
     try:
         if tail != 0 and len(b_array_path) > 1:
             b_array_path = np.array(b_array_path)
@@ -293,6 +298,9 @@ def plot_b_array(b_array, #data
 
     if title:
         plt.title(title)
+
+    if len(labels > 0):
+        plt.legend()
 
     if save and format == 'png':
         plt.savefig(title,pad_inches=0)

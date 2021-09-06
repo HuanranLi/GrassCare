@@ -164,6 +164,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                     title = 'Grasscare',
                     format = 'pdf',
                     color_map= c_array,
+                    labels = labels,
                     plot = final_picture)
 
         if video and not no_graph:
@@ -173,6 +174,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                 format = 'pdf',
                 color_map= c_array,
                 plot = final_picture,
+                labels = labels,
                 tail = -1,
                 b_array_path = info['b_array_path'])
 
