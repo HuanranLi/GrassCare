@@ -75,33 +75,38 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         video_tail = -1
     else:
         video_tail = optional_params['video_tail']
-		
+
 	#optional parameter for printing tools at GoogleColab
     if 'GoogleColab' not in optional_params:
         GoogleColab = False
     else:
         GoogleColab = optional_params['GoogleColab']
-        
+
     if 'final_picture' not in optional_params:
         final_picture = False
     else:
         final_picture = optional_params['final_picture']
-        
-        
+
+
     if 'no_graph' not in optional_params:
         no_graph = False
     else:
         no_graph = optional_params['no_graph']
-        
+
     if 'min_value_gain' not in optional_params:
         min_value_gain = 1e-5
     else:
         min_value_gain = optional_params['min_value_gain']
-        
+
     if 'min_eta' not in optional_params:
         min_eta = 1e-5
     else:
         min_eta = optional_params['min_eta']
+
+    if 'output_folder' not in optional_params:
+        output_folder = 'Time'
+    else:
+        output_folder = optional_params['output_folder']
 
 
 
@@ -149,7 +154,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                         min_value_gain = min_value_gain,
                         min_eta = min_eta)
 
-        
+
         if not no_graph:
             plot_b_array(new_b_array,
                     save = True,
@@ -169,10 +174,10 @@ def grasscare_plot(S, labels, video, optional_params = {}):
 
 
         clean_up()
-        
-        
+
+
         print('######################### Grasscare END ###########################\n')
-        
+
         return new_b_array, info
 
     ############################################################
@@ -221,8 +226,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
             path_names = optional_params['path_names']
         else:
             path_names = []
-        
-           
+
+
         if not no_graph:
             plot_b_array_path(b_array = new_b_array,
                             labels = labels,
@@ -244,12 +249,12 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         b_array = np.zeros((U_array.shape[0],U_array.shape[1],2))
         for col in range(U_array.shape[1]):
             b_array[:,col] = new_b_array[targets_count + col * U_array.shape[0] : targets_count + (col+1) * U_array.shape[0]]
-        
+
         if not no_graph:
-            clean_up()
-            
+            clean_up(output_folder)
+
         print('######################### Grasscare END ###########################\n')
-        
+
         return b_array, info
 
 
@@ -446,8 +451,10 @@ def grasscare_train(arrays_dict, #data
 '''
 After training, creating a folder with current date and time, move all generated graphs into the folder.
 '''
-def clean_up():
-    folder_name = datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '_results'
+def clean_up(folder_name):
+    if folder_name == 'Time':
+        folder_name = datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '_results'
+
     os.mkdir(folder_name)
 
     allfiles = os.listdir('./')
@@ -469,16 +476,16 @@ def upperBound(S, labels, beta = 1):
     nk = N // K
 
     D = N * (nk - 1) + N * (N - nk) * np.exp(-1 * np.arccosh(1 + 2*np.sin(np.pi/K)/(0.75**2) )**2 / beta)
-    
+
     U_dist_mat = dist_U_array(S)
     d = 0
     c = np.inf
     ind_mat = np.zeros(U_dist_mat.shape)
     for i in range(K):
-        sub_ind = labels == i 
-        
+        sub_ind = labels == i
+
         for row in range(N):
-            if sub_ind[row]:        
+            if sub_ind[row]:
                 ind_mat[row, sub_ind] = 1
 
     for i in range(N):
@@ -487,7 +494,7 @@ def upperBound(S, labels, beta = 1):
                 d = max(d, U_dist_mat[i,j])
             else:
                 c = min(c, U_dist_mat[i,j])
-    
+
     print('min_distance = ', c)
     gamma_array = np.zeros(N)
     for row in range(N):
@@ -502,7 +509,7 @@ def upperBound(S, labels, beta = 1):
     P_Gr_mat_nonzero[P_Gr_mat == 0] = 0.1
 
     bound = 0
-    #bound += np.sum(P_Gr_mat * np.log(P_Gr_mat_nonzero)) 
+    #bound += np.sum(P_Gr_mat * np.log(P_Gr_mat_nonzero))
 
     for i in range(N):
         for j in range(N):
@@ -516,13 +523,12 @@ def upperBound(S, labels, beta = 1):
                 #bound += np.exp(d-c**2) / (K * (nk - 1)) * ( 2.2**2/beta + np.log(D))
                 continue
 
-    
+
     bound += np.log(D)
-    #bound += (N - nk) * np.exp(d-c**2) / (nk-1)*  (2.2**2)/beta 
-    bound += 2 * K * np.exp(d-c**2) *  (2.2**2)/beta 
+    #bound += (N - nk) * np.exp(d-c**2) / (nk-1)*  (2.2**2)/beta
+    bound += 2 * K * np.exp(d-c**2) *  (2.2**2)/beta
 
     print('d = ', d)
     print('c = ', c)
     print('c^2 = ', c**2)
     return bound, d - c**2
-
