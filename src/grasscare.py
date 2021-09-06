@@ -177,7 +177,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
 
 
         if not no_graph:
-            clean_up(output_folder, folder_path = folder_path)
+            clean_up(folder_name, folder_path = folder_path)
 
 
         print('######################### Grasscare END ###########################\n')
@@ -255,7 +255,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
             b_array[:,col] = new_b_array[targets_count + col * U_array.shape[0] : targets_count + (col+1) * U_array.shape[0]]
 
         if not no_graph:
-            clean_up(output_folder, folder_path = folder_path)
+            clean_up(folder_name, folder_path = folder_path)
 
         print('######################### Grasscare END ###########################\n')
 
