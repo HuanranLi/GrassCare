@@ -134,7 +134,7 @@ def plot_b_array_path(b_array, #data
 
     for i in range(targets_count):
         if targets_count == 1:
-            plt.scatter(x[i],y[i], c = 'b', s = 20, label = 'Target'
+            plt.scatter(x[i],y[i], c = 'b', s = 20, label = 'Target')
         else:
             plt.scatter(x[i],y[i], c = 'b', s = 20, label = 'Target ' + str(i))
 
