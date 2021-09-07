@@ -223,7 +223,7 @@ def plot_b_array_path(b_array, #data
 Plot b_array on a 2-d disk.
 '''
 def plot_b_array(b_array, #data
-                color_map = None, #color for each point
+                color_map, #color for each point
                 zoom = False, #if zoom, no boundary of the circle will be plotted.
                 title =None, #the title of the graph
                 save = False, #save the graph if true
