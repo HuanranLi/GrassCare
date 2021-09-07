@@ -133,7 +133,10 @@ def plot_b_array_path(b_array, #data
     labels_normalized = labels / max(labels)
 
     for i in range(targets_count):
-        plt.scatter(x[i],y[i], c = 'b', s = 20)
+        if targets_count == 1:
+            plt.scatter(x[i],y[i], c = 'b', s = 20, label = 'Target'
+        else:
+            plt.scatter(x[i],y[i], c = 'b', s = 20, label = 'Target ' + str(i))
 
     for path_index in range(paths_count):
 

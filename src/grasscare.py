@@ -18,7 +18,7 @@ from GROUSE import *
 def grasscare_plot(S, labels, video, optional_params = {}):
 
 
-    print('\n######################### Grasscare 1.1.7 #########################')
+    print('\n######################### Grasscare 1.1.8 #########################')
 
     U_array = S
 
