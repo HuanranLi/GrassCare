@@ -136,7 +136,7 @@ The major framework this project uses are Python, and its supplementary packages
     <tr>
       <td>final_picture</td>
       <td>Boolean</td>
-      <td>True if user want the final picture of the gif. Default: True</td>
+      <td>True if user want the final picture of the gif. Default: False</td>
     </tr>
     <tr>
       <td>no_graph</td>
