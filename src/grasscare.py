@@ -18,7 +18,7 @@ from GROUSE import *
 def grasscare_plot(S, labels, video, optional_params = {}):
 
 
-    print('\n######################### Grasscare 1.1.8 #########################')
+    print('\n######################### Grasscare 1.1.9 #########################')
 
     U_array = S
 
@@ -83,7 +83,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         GoogleColab = optional_params['GoogleColab']
 
     if 'final_picture' not in optional_params:
-        final_picture = False
+        final_picture = True
     else:
         final_picture = optional_params['final_picture']
 
@@ -257,6 +257,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         for col in range(U_array.shape[1]):
             b_array[:,col] = new_b_array[targets_count + col * U_array.shape[0] : targets_count + (col+1) * U_array.shape[0]]
 
+        info['Target'] = new_b_array[-1 * targets_count:].copy()
         if not no_graph:
             clean_up(folder_name, folder_path = folder_path)
 
