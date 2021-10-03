@@ -161,7 +161,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         if not no_graph:
             plot_b_array(new_b_array,
                     save = True,
-                    title = 'GrassCar\'e',
+                    title = r'GrassCar\acute{e}',
                     format = 'pdf',
                     color_map= c_array,
                     labels = labels,
@@ -242,7 +242,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                             path_length = U_array.shape[0],
                             targets_count = targets_count,
                             video = video,
-                            title = r'$GrassCar\acute{e}$',
+                            title = r'GrassCar\acute{e}',
                             save = True,
                             plot = final_picture,
                             format = 'pdf',
