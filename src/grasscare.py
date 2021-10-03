@@ -256,6 +256,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
             b_array[:,col] = new_b_array[targets_count + col * U_array.shape[0] : targets_count + (col+1) * U_array.shape[0]]
 
         info['Target'] = new_b_array[:targets_count].copy()
+        info['flattened_b_array'] = new_b_array
+        
         if not no_graph:
             clean_up(folder_name, folder_path = folder_path)
 
