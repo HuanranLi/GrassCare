@@ -257,7 +257,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
 
         info['Target'] = new_b_array[:targets_count].copy()
         info['flattened_b_array'] = new_b_array
-        
+
         if not no_graph:
             clean_up(folder_name, folder_path = folder_path)
 
@@ -463,7 +463,9 @@ def clean_up(folder_name, folder_path = ''):
     if folder_name == 'Time':
         folder_name = datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '_results'
 
-    os.mkdir(folder_path + folder_name)
+    if not os.isdir(folder_path + folder_name):
+        os.mkdir(folder_path + folder_name)
+
     path = folder_path + folder_name + '/'
 
     allfiles = os.listdir('./')
