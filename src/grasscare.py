@@ -463,7 +463,7 @@ def clean_up(folder_name, folder_path = ''):
     if folder_name == 'Time':
         folder_name = datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '_results'
 
-    if not os.isdir(folder_path + folder_name):
+    if not os.path.isdir(folder_path + folder_name):
         os.mkdir(folder_path + folder_name)
 
     path = folder_path + folder_name + '/'
