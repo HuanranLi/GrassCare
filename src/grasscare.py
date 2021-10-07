@@ -446,6 +446,8 @@ def grasscare_train(arrays_dict, #data
     if obj_plot:
         plot_obj(obj_record)
 
+    info['obj_record'] = obj_record
+
     if gif_output != None:
         name = method + ': Last'
         plot_b_array(b_array, color_map= arrays_dict[c_array_name],
