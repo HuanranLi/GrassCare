@@ -180,7 +180,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
 
 
         if not no_graph:
-            clean_up(folder_name, folder_path = folder_path)
+            f_name = clean_up(folder_name, folder_path = folder_path)
+            info['folder_name'] = f_name
 
 
         print('######################### Grasscare END ###########################\n')
@@ -259,7 +260,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         info['flattened_b_array'] = new_b_array
 
         if not no_graph:
-            clean_up(folder_name, folder_path = folder_path)
+            f_name = clean_up(folder_name, folder_path = folder_path)
+            info['folder_name'] = f_name
 
         print('######################### Grasscare END ###########################\n')
 
@@ -474,6 +476,8 @@ def clean_up(folder_name, folder_path = ''):
     for f in allfiles:
         if ('pdf' in f) or ('png' in f) or ('eps' in f) or ('gif' in f):
             shutil.move(f, path + f)
+            
+    return folder_name
 
 
 '''
