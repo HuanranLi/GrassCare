@@ -112,7 +112,9 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         folder_path = ''
     else:
         folder_path = optional_params['folder_path']
-
+        
+    limit_boundary = not ((embedding_method == 'EuclideanL2') and (cost_function == 't-SNE'))
+    print('limit_boundary:', limit_boundary)
     ############################################################
     # Part 1: Single Time Frame Plotting
     ############################################################
@@ -165,7 +167,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                     format = 'pdf',
                     color_map= c_array,
                     labels = labels,
-                    plot = final_picture)
+                    plot = final_picture,
+                    limit_boundary = limit_boundary)
 
         if video and not no_graph:
             plot_b_array(new_b_array,
@@ -176,7 +179,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                 plot = final_picture,
                 labels = labels,
                 tail = -1,
-                b_array_path = info['b_array_path'])
+                b_array_path = info['b_array_path'],
+                limit_boundary = limit_boundary)
 
 
         if not no_graph:
@@ -248,7 +252,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                             plot = final_picture,
                             format = 'pdf',
                             tail = video_tail,
-                            path_names = path_names
+                            path_names = path_names,
+                            limit_boundary = limit_boundary
                             )
 
 

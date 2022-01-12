@@ -103,7 +103,8 @@ def plot_b_array_path(b_array, #data
                 save = False, #save the graph if true
                 plot = False, #show the graph if true
                 format = 'png', #format of graph: png, pdf, eps
-                tail = 0
+                tail = 0,
+                limit_boundary = True
                 ) :
 
     x = b_array[:,0]
@@ -113,8 +114,9 @@ def plot_b_array_path(b_array, #data
     BIGGER_SIZE = 20
 
     fig = plt.figure(figsize=(4,4),dpi = 200)
-    plt.xlim(-1.1, 1.1)
-    plt.ylim(-1.1, 1.1)
+    if limit_boundary:
+        plt.xlim(-1.1, 1.1)
+        plt.ylim(-1.1, 1.1)
 
 
     plt.rc('font', size=BIGGER_SIZE)          # controls default text sizes
@@ -125,18 +127,19 @@ def plot_b_array_path(b_array, #data
     plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
     plt.rc('figure', titlesize=BIGGER_SIZE)
 
-    ax = plt.gca()
-    circle2 = plt.Circle((0, 0), 1, color='b', fill=False)
-    ax.add_patch(circle2)
+    if limit_boundary:
+        ax = plt.gca()
+        circle2 = plt.Circle((0, 0), 1, color='b', fill=False)
+        ax.add_patch(circle2)
 
     cmap=plt.get_cmap("jet")
     labels_normalized = labels / max(labels)
 
     for i in range(targets_count):
         if targets_count == 1:
-            plt.scatter(x[i],y[i], c = 'b', s = 20, label = 'Target')
+            plt.scatter(x[i],y[i], c = 'fuchsia', s = 20, label = 'Target')
         else:
-            plt.scatter(x[i],y[i], c = 'b', s = 20, label = 'Target ' + str(i))
+            plt.scatter(x[i],y[i], c = 'fuchsia', s = 20, label = 'Target ' + str(i))
 
     for path_index in range(paths_count):
 
@@ -169,8 +172,9 @@ def plot_b_array_path(b_array, #data
             filenames.append(name+'.png')
 
             fig = plt.figure(figsize=(4,4),dpi = 200)
-            plt.xlim(-1.1, 1.1)
-            plt.ylim(-1.1, 1.1)
+            if limit_boundary:
+                plt.xlim(-1.1, 1.1)
+                plt.ylim(-1.1, 1.1)
 
 
             plt.rc('font', size=BIGGER_SIZE)          # controls default text sizes
@@ -181,15 +185,16 @@ def plot_b_array_path(b_array, #data
             plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
             plt.rc('figure', titlesize=BIGGER_SIZE)
 
-            ax = plt.gca()
-            circle2 = plt.Circle((0, 0), 1, color='b', fill=False)
-            ax.add_patch(circle2)
+            if limit_boundary:
+                ax = plt.gca()
+                circle2 = plt.Circle((0, 0), 1, color='b', fill=False)
+                ax.add_patch(circle2)
 
             cmap=plt.get_cmap("jet")
             labels_normalized = labels / max(labels)
 
             for i in range(targets_count):
-                plt.scatter(x[i],y[i], c = 'b', s = 20)
+                plt.scatter(x[i],y[i], c = 'fuchsia', s = 20)
 
             for path_index in range(paths_count):
 
@@ -237,13 +242,15 @@ def plot_b_array(b_array, #data
                 geodesic_steps = 0, #paramter for GROUSE
                 labels = [],
                 tail = 0,
-                b_array_path = None) :
+                b_array_path = None,
+                limit_boundary = True) :
 
 
     #graph setting
     fig = plt.figure(figsize=(4,4),dpi = 200)
-    plt.xlim(-1.1, 1.1)
-    plt.ylim(-1.1, 1.1)
+    if limit_boundary:
+        plt.xlim(-1.1, 1.1)
+        plt.ylim(-1.1, 1.1)
 
     SMALL_SIZE = 10
     MEDIUM_SIZE = 15
@@ -296,7 +303,7 @@ def plot_b_array(b_array, #data
         + ' It can be found in info[\'b_array_path\'] returned from grasscare_train().')
 
 
-    if not zoom:
+    if not zoom and limit_boundary:
         circle2 = plt.Circle((0, 0), 1, color='b', fill=False)
         ax.add_patch(circle2)
 
