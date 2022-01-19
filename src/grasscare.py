@@ -238,7 +238,11 @@ def grasscare_plot(S, labels, video, optional_params = {}):
             path_names = optional_params['path_names']
         else:
             path_names = []
-
+        
+        if 'color_path' in optional_params:
+            color_path = optional_params['color_path']
+        else:
+            color_path = 'Default'
 
         if not no_graph:
             plot_b_array_path(b_array = new_b_array,
@@ -253,7 +257,8 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                             format = 'pdf',
                             tail = video_tail,
                             path_names = path_names,
-                            limit_boundary = limit_boundary
+                            limit_boundary = limit_boundary,
+                            color_path = color_path
                             )
 
 

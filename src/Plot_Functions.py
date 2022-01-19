@@ -50,7 +50,10 @@ def plot_U_array(U_array, labels, title = None):
     #ax.plot_wireframe(x, y, z, color="k")
 
     cmap=plt.get_cmap("jet")
-    c_array = [cmap(i / max(labels)) for i in labels]
+    if max(labels) > 0:
+        c_array = [cmap(i / max(labels)) for i in labels]
+    else:
+        c_array = [0.5 for i in labels]
 
     ax.scatter(U_array[:,0,0],U_array[:,1,0],U_array[:,2,0], c = c_array, s = 10)
 
@@ -104,7 +107,9 @@ def plot_b_array_path(b_array, #data
                 plot = False, #show the graph if true
                 format = 'png', #format of graph: png, pdf, eps
                 tail = 0,
-                limit_boundary = True
+                limit_boundary = True,
+                boundary = [],
+                color_path = 'Default'
                 ) :
 
     x = b_array[:,0]
@@ -117,6 +122,10 @@ def plot_b_array_path(b_array, #data
     if limit_boundary:
         plt.xlim(-1.1, 1.1)
         plt.ylim(-1.1, 1.1)
+    elif len(boundary) > 0:
+        plt.xlim(np.array(boundary)[0,0],np.array(boundary)[0,1])
+        plt.ylim(np.array(boundary)[1,0],np.array(boundary)[1,1]) 
+    
 
 
     plt.rc('font', size=BIGGER_SIZE)          # controls default text sizes
@@ -133,7 +142,11 @@ def plot_b_array_path(b_array, #data
         ax.add_patch(circle2)
 
     cmap=plt.get_cmap("jet")
-    labels_normalized = labels / max(labels)
+    
+    if max(labels) > 0:
+        labels_normalized = labels / max(labels)
+    else:
+        labels_normalized = labels + 1
 
     for i in range(targets_count):
         if targets_count == 1:
@@ -144,15 +157,27 @@ def plot_b_array_path(b_array, #data
     for path_index in range(paths_count):
 
         index = targets_count + (path_index + 1) * path_length - 1
-        plt.scatter(x[index], y[index], c = [cmap(labels_normalized[path_index])], s = 10)
+        
+        if color_path == 'Default':
+            plt.scatter(x[index], y[index], c = [cmap(labels_normalized[path_index])], s = 10)
+        else:
+            plt.scatter(x[index], y[index], c = color_path, s = 10)
 
         start = targets_count + path_index * path_length
 
         if len(path_names) > 0:
-            plt.plot(x[start : index + 1],y[start : index + 1], linewidth=0.5, c = cmap(labels_normalized[path_index]), label = path_names[path_index])
+            
+            if color_path == 'Default':
+                plt.plot(x[start : index + 1],y[start : index + 1], linewidth=0.5, c = cmap(labels_normalized[path_index]), label = path_names[path_index])
+            else:
+                plt.plot(x[start : index + 1],y[start : index + 1], linewidth=0.5, c = color_path, label = path_names[path_index])
+                
             plt.legend()
         else:
-            plt.plot(x[start : index + 1],y[start : index + 1], linewidth=0.5, c = cmap(labels_normalized[path_index]))
+            if color_path == 'Default':
+                plt.plot(x[start : index + 1],y[start : index + 1], linewidth=0.5, c = cmap(labels_normalized[path_index]))
+            else:
+                plt.plot(x[start : index + 1],y[start : index + 1], linewidth=0.5, c = color_path)
 
     if title:
         plt.title(title)
@@ -175,6 +200,9 @@ def plot_b_array_path(b_array, #data
             if limit_boundary:
                 plt.xlim(-1.1, 1.1)
                 plt.ylim(-1.1, 1.1)
+            elif len(boundary) > 0:
+                plt.xlim(np.array(boundary)[0,0],np.array(boundary)[0,1])
+                plt.ylim(np.array(boundary)[1,0],np.array(boundary)[1,1]) 
 
 
             plt.rc('font', size=BIGGER_SIZE)          # controls default text sizes
@@ -191,7 +219,10 @@ def plot_b_array_path(b_array, #data
                 ax.add_patch(circle2)
 
             cmap=plt.get_cmap("jet")
-            labels_normalized = labels / max(labels)
+            if max(labels) > 0:
+                labels_normalized = labels / max(labels)
+            else:
+                labels_normalized = labels + 1
 
             for i in range(targets_count):
                 plt.scatter(x[i],y[i], c = 'fuchsia', s = 20)
@@ -243,7 +274,8 @@ def plot_b_array(b_array, #data
                 labels = [],
                 tail = 0,
                 b_array_path = None,
-                limit_boundary = True) :
+                limit_boundary = True,
+                boundary = []) :
 
 
     #graph setting
@@ -251,6 +283,9 @@ def plot_b_array(b_array, #data
     if limit_boundary:
         plt.xlim(-1.1, 1.1)
         plt.ylim(-1.1, 1.1)
+    elif len(boundary) > 0:
+        plt.xlim(np.array(boundary)[0,0],np.array(boundary)[0,1])
+        plt.ylim(np.array(boundary)[1,0],np.array(boundary)[1,1]) 
 
     SMALL_SIZE = 10
     MEDIUM_SIZE = 15
