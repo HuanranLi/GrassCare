@@ -55,6 +55,7 @@ def U_array_init(ambient_dimension, rank, count, clusters, bound_zero = 1e-10,  
                 U_array[i] = q_i
 
             #make sure its orthogonal
+            print(np.linalg.norm(U_array[i].T @ U_array[i] - np.identity(r)))
             assert np.linalg.norm(U_array[i].T @ U_array[i] - np.identity(r)) < bound_zero
             #make sure its normal
             assert  np.linalg.norm( np.linalg.norm(U_array[i], axis = 0) - np.ones(r) )  < bound_zero

@@ -354,12 +354,42 @@ def grasscare_train(arrays_dict, #data
     if debug:
         print('del_L')
         print(del_L_array)
+    
+#    old_del = np.zeros(b_array.shape)
+#    moment = 1
+
+#    new_b_array = retraction(b_array = b_array,
+#                             del_L_array = del_L_array,
+#                             eta = eta,
+#                             method = method,
+#                             moment = moment,
+#                             old_del = old_del)
+#  old_del =  del_L_array
+  
+    #old_del = np.zeros(b_array.shape)
+    b_1 = 0.5
+    b_2 = 0.7
+    lambd = 1e-8
+    m_t = np.zeros(b_array.shape, float)
+    v_t = np.zeros(b_array.shape, float)
+    
 
     new_b_array = retraction(b_array = b_array,
                              del_L_array = del_L_array,
                              eta = eta,
-                             method = method)
-
+                             method = method,
+                             b_1 = b_1,
+                             b_2 = b_2,
+                             m_t = m_t,
+                             v_t = v_t,                      
+                             lambd = lambd)
+                           
+                             
+    
+  
+    m_t = b_1*m_t + (1 - b_1)*del_L_array
+    v_t = b_2*v_t + (1 - b_2)*del_L_array**2
+    
     if debug:
         print('new_b_array')
         print(new_b_array)
@@ -375,6 +405,7 @@ def grasscare_train(arrays_dict, #data
 
     #names of graphs if gif needs to be ploted
     filenames = []
+    pool = mp.Pool(mp.cpu_count())
     for iter in range(epoch):
         name =  'Optimization Iteration: ' + str(iter)
         #graphing
@@ -398,13 +429,20 @@ def grasscare_train(arrays_dict, #data
         if printing:
             print(iter)
 
-        dist_b_array_mat = dist_b_array(b_array = new_b_array, method = method)
+        #dist_b_array_mat = dist_b_array(b_array = new_b_array, method = method)
+        dist_b_array_mat = pool.apply(dist_b_array, args = (new_b_array, method))
 
-        P_Ball_mat, support_mat = P_Ball(b_array = new_b_array,
-                            method = method,
-                            dist_b_array_mat = dist_b_array_mat,
-                            cost_func = cost_func,
-                            beta = beta)
+        #P_Ball_mat, support_mat = P_Ball(b_array = new_b_array,
+        #                  method = method,
+        #                    dist_b_array_mat = dist_b_array_mat,
+        #                    cost_func = cost_func,
+        #                    beta = beta)
+        
+        P_Ball_mat, support_mat = pool.apply(P_Ball, args = (new_b_array,
+                                                    method,
+                                                    dist_b_array_mat, 
+                                                    cost_func, 
+                                                    beta))
 
         assert abs(np.sum(P_Ball_mat) - 1) < 1e-5
 
@@ -429,8 +467,12 @@ def grasscare_train(arrays_dict, #data
             break
         else:
             b_array = new_b_array
-            new_b_array = retraction(b_array, del_L_array, eta, method)
+            #new_b_array = retraction(b_array, del_L_array, eta, method, moment, old_del)
+            new_b_array = retraction(b_array, del_L_array, eta, method, b_1, b_2, m_t, v_t, lambd)
             obj_record.append(obj)
+            
+            m_t = b_1*m_t + (1 - b_1)*del_L_array
+            v_t = b_2*v_t + (1 - b_2)*del_L_array**2
 
             if b_array_path:
                 info['b_array_path'].append(b_array)
@@ -445,7 +487,7 @@ def grasscare_train(arrays_dict, #data
                 out.update(IPython.display.Pretty(string))
             else:
                 print(string, end = '\r')
-
+    pool.close()
     if printing_update:
         if google_colab:
             out.update(IPython.display.Pretty('Found the optimizer with ' + str(iter) + ' iterations!     '))
@@ -469,6 +511,7 @@ def grasscare_train(arrays_dict, #data
         gif_plot(filenames, gif_output)
 
     return b_array, info
+
 
 '''
 After training, creating a folder with current date and time, move all generated graphs into the folder.

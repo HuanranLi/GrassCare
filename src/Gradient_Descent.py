@@ -1,16 +1,28 @@
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 import os
 import imageio
 import seaborn as sns
 import IPython
+from numpy.linalg import eig
+import multiprocessing as mp
+
 
 
 '''
 Geodesic Distance for Grassmannian
 '''
 def d_G(U_i, U_j):
-    u,s,vt = np.linalg.svd(U_j @ U_j.T @ U_i)
+   
+    
+    u,s,v = np.linalg.svd(U_j @ U_j.T @ U_i)
+    #A = U_j @ U_j.T @ U_i
+    #u,v = np.linalg.eig(A.T@A)
+    #s = np.sqrt(abs(u))
+  
+   
+    
 
     for i in range(len(s)):
         if s[i] - 1 > 1e-5:
@@ -131,6 +143,10 @@ def del_d_p(p_i, p_j, method = 'Euclidean'):
     else:
         raise Exception('No method found for ' + method)
 
+        
+        
+
+
 '''
 Calculate the distance matrix on the 2-d Embedding
 '''
@@ -138,11 +154,13 @@ def dist_b_array(b_array, method):
     N = b_array.shape[0]
 
     dist_mat = np.zeros((N,N))
+    #pool = mp.Pool(mp.cpu_count())
     for i in range(N):
         for j in range(i,N):
             dist_mat[i,j] = d_p(b_array[i], b_array[j], method = method)
+            #dist_mat[i,j] = pool.apply(d_p, args = (b_array[i], b_array[j], method))
             dist_mat[j,i] = dist_mat[i,j]
-
+    #pool.close()
     return dist_mat
     
 def dist_U_array(U_array):
@@ -237,9 +255,12 @@ def P_Gr(U_array, cost_func):
 
     P_Gr_mat = np.zeros((K,K))
     d_G_mat = np.zeros((K,K))
+    #pool = mp.Pool(mp.cpu_count())
     for row in range(K):
         for col in range(K):
             d_G_mat[row, col] = d_G(U_array[row], U_array[col])
+            #d_G_mat[row, col] = pool.apply(d_G, args=(U_array[row], U_array[col]))
+    #pool.close()   
 
     for row in range(K):
         gamma_array[row] = np.std(d_G_mat[row,:])
@@ -295,7 +316,7 @@ def L_obj(P_Ball_mat, P_Gr_mat, cost_func):
 '''
 Gradient of objective function for the opimization
 '''
-def del_L(b_array, P_Ball_mat, P_Gr_mat, cost_func, method, dist_b_array_mat, beta, support_mat):
+def del_L(b_array, P_Ball_mat, P_Gr_mat, cost_func, dist_b_array_mat, method, beta, support_mat):
 
     K = P_Ball_mat.shape[0]
 
@@ -331,14 +352,21 @@ Step in the Gradient direction. Then perform rectraction if necessary.
 Retraction mainly for Poincare disk. It is used after the gradient step calculation. It can also be used
 to shrink the points back to the disk for Euclidean Disk.
 '''
-def retraction(b_array, del_L_array, eta, method, eps = 1e-5):
+'''
+def retraction(b_array, del_L_array, eta, method, moment, old_del, eps = 1e-5):  
     new_b_array = np.zeros(b_array.shape)
     K = b_array.shape[0]
+   
 
     for i in range(K):
         #gradient step
         if method == 'Poincare':
-            projectee = b_array[i] - eta * (1 - b_array[i].T @ b_array[i])**2 / 4 * del_L_array[i]
+            #projectee = b_array[i] - eta * (1 - b_array[i].T @ b_array[i])**2 / 4 * del_L_array[i]
+            new_change = eta * (1 - b_array[i].T @ b_array[i])**2 / 4 * del_L_array[i] + moment * (eta * (1 - b_array[i].T @ b_array[i])**2 / 4 * old_del[i])
+            
+            projectee = b_array[i] - new_change
+            
+            
         elif method == 'Euclidean':
             projectee = b_array[i] - eta * del_L_array[i]
         elif method == 'EuclideanL2':
@@ -364,9 +392,71 @@ def retraction(b_array, del_L_array, eta, method, eps = 1e-5):
         else:
             #doing projection on disk
             norm = projectee.T @ projectee
+            
             if norm >= 1:
                 new_b_array[i] = projectee / (norm + eps)
             else:
                 new_b_array[i] = projectee
 
     return new_b_array
+'''
+
+
+
+def retraction(b_array, del_L_array, eta, method, b_1, b_2, m_t, v_t, lambd,  eps = 1e-5):  
+    new_b_array = np.zeros(b_array.shape)
+    K = b_array.shape[0]
+    m_t_hat = np.zeros(b_array.shape, float)
+    v_t_hat = np.zeros(b_array.shape, float)
+   
+
+    for i in range(K):
+        #gradient step
+        if method == 'Poincare':
+            #projectee = b_array[i] - eta * (1 - b_array[i].T @ b_array[i])**2 / 4 * del_L_array[i]
+            #new_change = eta * (1 - b_array[i].T @ b_array[i])**2 / 4 * del_L_array[i] + moment * (eta * (1 - b_array[i].T @ b_array[i])**2 / 4 * old_del[i])
+            m_t[i] = b_1*m_t[i] + (1 - b_1)*del_L_array[i]
+            v_t[i] = b_2*v_t[i] + (1 - b_2)* del_L_array[i]**2
+            m_t_hat[i] = m_t[i] / (1-b_1**(i+1))
+            v_t_hat[i] = v_t[i] / (1-b_2**(i+1))
+            change = ((eta * (1 - b_array[i].T @ b_array[i])**2 / 4)*m_t_hat[i]) / (np.sqrt(v_t_hat[i]) + lambd)
+            
+            
+            projectee = b_array[i] - change
+            #print(projectee)
+            
+            
+        elif method == 'Euclidean':
+            projectee = b_array[i] - eta * del_L_array[i]
+        elif method == 'EuclideanL2':
+            projectee = b_array[i] - eta * del_L_array[i]
+        elif method == 'Angle':
+            projectee = b_array[i] - eta * del_L_array[i]
+        else:
+            raise Exception('No method found for:' + method)
+
+
+        #retraction on circle
+        if method == 'Angle':
+            while (projectee[0] < 0):
+                projectee += 2 * np.pi
+            while (projectee[0] > 2 * np.pi):
+                projectee -= 2 * np.pi
+
+            new_b_array[i] = projectee
+
+        if (method == 'Euclidean' or method == 'EuclideanL2'):
+            new_b_array[i] = projectee
+
+        else:
+            #doing projection on disk
+            norm = projectee.T @ projectee
+            #print(norm)
+            
+            if norm >= 1:
+                new_b_array[i] = projectee / (norm + eps)
+            else:
+                new_b_array[i] = projectee
+
+    return new_b_array
+
