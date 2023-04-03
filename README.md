@@ -85,11 +85,11 @@ The major framework this project uses are Python, and its supplementary packages
         </table>
 
   * labels: A np.ndarray with N elements where i'th entry corresponds to U_i'th label. Labels start index at 0.
-  * video: True - Generate a video in gif and pdf format to display the path with shifting in time. If only one single time frame is contained in S, (i.e. T = 0), video will be generated to show its optimization path instead of clustering path.
-  * embedding_picture: True - Generate a picture of embedding for single time frame mode.
-  * optimizer: 'Gradient Descent' or 'ADAM'
-  * max_epoch: Default 500. Defines the maximum GrassCare training iterations
-  * step_size: Default 1.
+  * video: Default True - Generate a video in gif and pdf format to display the path with shifting in time. If only one single time frame is contained in S, (i.e. T = 0), video will be generated to show its optimization path instead of clustering path.
+  * embedding_picture: Default True - Generate a picture of embedding for single time frame mode.
+  * optimizer: Default 'Gradient Descent' - Or 'ADAM'
+  * max_epoch: Default 500 - Defines the maximum GrassCare training iterations
+  * step_size: Default 1
   * optional_params: It is default to be an empty dictionary. If no optional parameter is needed, just run `grasscare_plot(S, labels, video)`. Here are optional parameters:
     <table id="OPT">
     <tr>
@@ -123,11 +123,6 @@ The major framework this project uses are Python, and its supplementary packages
       <td>True if running the program in Google Colab. The tool used for printing the update for each iteration is different. Default: False</td>
     </tr>
     <tr>
-      <td>no_graph</td>
-      <td>Boolean</td>
-      <td>True if user does not want to generate any graphs. It will be used if only the embedding is needed. Default: False</td>
-    </tr>
-    <tr>
       <td>folder_path</td>
       <td>String</td>
       <td>The path that the user want the result folder to be created in. Default: './'</td>
@@ -147,10 +142,7 @@ The major framework this project uses are Python, and its supplementary packages
 
 <!-- USAGE EXAMPLES -->
 ### Demo
-* To find the best embedding for clusters' path, please refer [demo_clusterpath.py](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo/demo_clusterpath.py). It can be run by: `python3 demo_clusterpath.py`
-* To find the best embedding for GROUSE routes, please refer [demo_GROUSE.py](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo/demo_GROUSE.py). It can be run by: `python3 demo_GROUSE.py`
-* To see how the optimization process is done, please refer [demo_optimization](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo/demo_optimization.py). It can be run by: `python3 demo_optimzation.py`
-* Notebook version is also available for finding the best embedding for clusters' path, please refer [Notebook_demo.ipynb](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo/Notebook_demo.ipynb).
+* To find the best embedding, please refer [demo_clusterpath.py](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo/demo_clusterpath.py). 
 
 <!-- ROADMAP -->
 ## Roadmap
