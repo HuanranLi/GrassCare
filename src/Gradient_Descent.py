@@ -352,8 +352,8 @@ Step in the Gradient direction. Then perform rectraction if necessary.
 Retraction mainly for Poincare disk. It is used after the gradient step calculation. It can also be used
 to shrink the points back to the disk for Euclidean Disk.
 '''
-'''
-def retraction(b_array, del_L_array, eta, method, moment, old_del, eps = 1e-5):  
+
+def retraction_GD(b_array, del_L_array, eta, method, moment, old_del, eps = 1e-5):  
     new_b_array = np.zeros(b_array.shape)
     K = b_array.shape[0]
    
@@ -399,11 +399,11 @@ def retraction(b_array, del_L_array, eta, method, moment, old_del, eps = 1e-5):
                 new_b_array[i] = projectee
 
     return new_b_array
-'''
 
 
 
-def retraction(b_array, del_L_array, eta, method, b_1, b_2, m_t, v_t, lambd,  eps = 1e-5):  
+
+def retraction_ADAM(b_array, del_L_array, eta, method, b_1, b_2, m_t, v_t, lambd,  eps = 1e-5):  
     new_b_array = np.zeros(b_array.shape)
     K = b_array.shape[0]
     m_t_hat = np.zeros(b_array.shape, float)

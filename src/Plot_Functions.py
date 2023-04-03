@@ -181,8 +181,9 @@ def plot_b_array_path(b_array, #data
 
     if title:
         plt.title(title)
-
-    plt.savefig('Grasscare.pdf',pad_inches=0, format = 'pdf')
+    
+    if save:
+        plt.savefig('Grasscare.pdf',pad_inches=0, format = 'pdf')
 
     if plot:
         plt.show()

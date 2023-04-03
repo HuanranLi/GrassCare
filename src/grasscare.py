@@ -15,19 +15,30 @@ from Plot_Functions import *
 from Initialization import *
 from GROUSE import *
 
-def grasscare_plot(S, labels, video, optional_params = {}):
+def grasscare_plot(S, 
+                    labels, 
+                    video = True, 
+                    embedding_picture = True,
+                    optimizer = 'Gradient Descent',
+                    max_epoch = 500,
+                    step_size = 1,
+                    optional_params = {}):
 
 
-    print('\n######################### Grasscare 1.1.9 #########################')
+    print('\n######################### Grasscare 2.0.1 #########################')
 
     U_array = S
-
-
 
     ####################################################
     # Defaulting parameters
     ####################################################
-
+    #optional parameter for beta for P_B
+    if 'objective_plot' not in optional_params:
+        objective_plot = False
+    else:
+        objective_plot = optional_params['objective_plot']
+        
+        
     #optional parameter for how b_array is initialized.
     if 'b_array_init_syle' not in optional_params:
         b_array_init_syle = 'random'
@@ -46,17 +57,6 @@ def grasscare_plot(S, labels, video, optional_params = {}):
     else:
         cost_function = optional_params['cost_function']
 
-    #optional parameter for cost function.
-    if 'max_epoch' not in optional_params:
-        max_epoch = 500
-    else:
-        max_epoch = optional_params['max_epoch']
-
-    #optional parameter for cost function.
-    if 'step_size' not in optional_params:
-        step_size = 1
-    else:
-        step_size = optional_params['step_size']
 
     #optional parameter for beta for P_B
     if 'beta' not in optional_params:
@@ -64,14 +64,10 @@ def grasscare_plot(S, labels, video, optional_params = {}):
     else:
         beta = optional_params['beta']
 
-    #optional parameter for beta for P_B
-    if 'objective_plot' not in optional_params:
-        objective_plot = True
-    else:
-        objective_plot = optional_params['objective_plot']
-
     #optional parameter for the tail behind the path for video
-    if 'video_tail' not in optional_params:
+    if not video:
+        video_tail = 0
+    elif 'video_tail' not in optional_params:
         video_tail = -1
     else:
         video_tail = optional_params['video_tail']
@@ -92,6 +88,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         no_graph = False
     else:
         no_graph = optional_params['no_graph']
+
 
     if 'min_value_gain' not in optional_params:
         min_value_gain = 1e-5
@@ -114,20 +111,19 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         folder_path = optional_params['folder_path']
         
     limit_boundary = not ((embedding_method == 'EuclideanL2') and (cost_function == 't-SNE'))
-    print('limit_boundary:', limit_boundary)
     ############################################################
     # Part 1: Single Time Frame Plotting
     ############################################################
     t = len(U_array.shape) - 2
     if t == 1:
-        print('Single Time Frame Mode: On')
+        print('Mode: Single Time Frame')
 
         #Color Map For the plot
         cmap=plt.get_cmap("jet")
         c_array = [cmap(i / max(labels)) for i in labels]
 
         #name for the video
-        if video and not no_graph:
+        if video:
             print('\nNote: Optimization video will be generated instead of path video!')
             gif_output = 'Optimization_Process.gif'
         else:
@@ -146,6 +142,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         arrays_dict['c_array'] = c_array
 
         new_b_array, info = grasscare_train(arrays_dict = arrays_dict,
+                        optimizer = optimizer,
                         method = embedding_method,
                         epoch = max_epoch,
                         eta = step_size,
@@ -159,31 +156,29 @@ def grasscare_plot(S, labels, video, optional_params = {}):
                         min_value_gain = min_value_gain,
                         min_eta = min_eta)
 
-
-        if not no_graph:
+        #plot final embedding
+        if embedding_picture:
             plot_b_array(new_b_array,
                     save = True,
                     title = 'GrassCaré',
                     format = 'pdf',
                     color_map= c_array,
                     labels = labels,
-                    plot = final_picture,
                     limit_boundary = limit_boundary)
 
-        if video and not no_graph:
+        if video:
             plot_b_array(new_b_array,
                 save = True,
                 title = 'Optimization_Process',
                 format = 'pdf',
                 color_map= c_array,
-                plot = final_picture,
                 labels = labels,
                 tail = -1,
                 b_array_path = info['b_array_path'],
                 limit_boundary = limit_boundary)
 
 
-        if not no_graph:
+        if video or embedding_picture:
             f_name = clean_up(folder_name, folder_path = folder_path)
             info['folder_name'] = f_name
 
@@ -219,6 +214,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         print('Reshaped S shape:', merged_U_array.shape)
 
         new_b_array, info = grasscare_train(arrays_dict = arrays_dict,
+                        optimizer = optimizer,
                         method = embedding_method,
                         epoch = max_epoch,
                         eta = step_size,
@@ -244,16 +240,16 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         else:
             color_path = 'Default'
 
-        if not no_graph:
-            plot_b_array_path(b_array = new_b_array,
+        
+        plot_b_array_path(b_array = new_b_array,
                             labels = labels,
                             paths_count = U_array.shape[1],
                             path_length = U_array.shape[0],
                             targets_count = targets_count,
                             video = video,
                             title = 'GrassCaré',
-                            save = True,
-                            plot = final_picture,
+                            plot = video,
+                            save = video,
                             format = 'pdf',
                             tail = video_tail,
                             path_names = path_names,
@@ -269,7 +265,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
         info['Target'] = new_b_array[:targets_count].copy()
         info['flattened_b_array'] = new_b_array
 
-        if not no_graph:
+        if video:
             f_name = clean_up(folder_name, folder_path = folder_path)
             info['folder_name'] = f_name
 
@@ -283,6 +279,7 @@ def grasscare_plot(S, labels, video, optional_params = {}):
 Major Grasscare algorithms. Including gradient descent and graphing.
 '''
 def grasscare_train(arrays_dict, #data
+            optimizer,
             method, #Decide the embedding: Poincare, Euclidean, EuclideanL2
             cost_func, #cost functions: s-SNE, t-SNE, p-SNE(Symmetric SNE with distance instead of distrance^2 for P_Ball)
             epoch, #max epoch
@@ -354,41 +351,46 @@ def grasscare_train(arrays_dict, #data
     if debug:
         print('del_L')
         print(del_L_array)
+        
     
-#    old_del = np.zeros(b_array.shape)
-#    moment = 1
+    if optimizer == 'Gradient Descent':
+        old_del = np.zeros(b_array.shape)
+        moment = 1
 
-#    new_b_array = retraction(b_array = b_array,
-#                             del_L_array = del_L_array,
-#                             eta = eta,
-#                             method = method,
-#                             moment = moment,
-#                             old_del = old_del)
-#  old_del =  del_L_array
-  
-    #old_del = np.zeros(b_array.shape)
-    b_1 = 0.5
-    b_2 = 0.7
-    lambd = 1e-8
-    m_t = np.zeros(b_array.shape, float)
-    v_t = np.zeros(b_array.shape, float)
-    
+        new_b_array = retraction_GD(b_array = b_array,
+                                 del_L_array = del_L_array,
+                                 eta = eta,
+                                 method = method,
+                                 moment = moment,
+                                 old_del = old_del)
+        old_del =  del_L_array
+    elif optimizer == 'ADAM':
+        #old_del = np.zeros(b_array.shape)
+        b_1 = 0.5
+        b_2 = 0.7
+        lambd = 1e-8
+        m_t = np.zeros(b_array.shape, float)
+        v_t = np.zeros(b_array.shape, float)
+        
 
-    new_b_array = retraction(b_array = b_array,
-                             del_L_array = del_L_array,
-                             eta = eta,
-                             method = method,
-                             b_1 = b_1,
-                             b_2 = b_2,
-                             m_t = m_t,
-                             v_t = v_t,                      
-                             lambd = lambd)
-                           
-                             
-    
-  
-    m_t = b_1*m_t + (1 - b_1)*del_L_array
-    v_t = b_2*v_t + (1 - b_2)*del_L_array**2
+        new_b_array = retraction_ADAM(b_array = b_array,
+                                 del_L_array = del_L_array,
+                                 eta = eta,
+                                 method = method,
+                                 b_1 = b_1,
+                                 b_2 = b_2,
+                                 m_t = m_t,
+                                 v_t = v_t,                      
+                                 lambd = lambd)
+                               
+                                 
+        
+      
+        m_t = b_1*m_t + (1 - b_1)*del_L_array
+        v_t = b_2*v_t + (1 - b_2)*del_L_array**2
+    else:
+        print('Optimizer not found for:', optimizer)
+        assert False
     
     if debug:
         print('new_b_array')
@@ -467,12 +469,16 @@ def grasscare_train(arrays_dict, #data
             break
         else:
             b_array = new_b_array
-            #new_b_array = retraction(b_array, del_L_array, eta, method, moment, old_del)
-            new_b_array = retraction(b_array, del_L_array, eta, method, b_1, b_2, m_t, v_t, lambd)
-            obj_record.append(obj)
+            if optimizer == 'Gradient Descent':
+                new_b_array = retraction_GD(b_array, del_L_array, eta, method, moment, old_del)
+                old_del =  del_L_array
+          
+            elif optimizer == 'ADAM':
+                new_b_array = retraction_ADAM(b_array, del_L_array, eta, method, b_1, b_2, m_t, v_t, lambd)    
+                m_t = b_1*m_t + (1 - b_1)*del_L_array
+                v_t = b_2*v_t + (1 - b_2)*del_L_array**2
             
-            m_t = b_1*m_t + (1 - b_1)*del_L_array
-            v_t = b_2*v_t + (1 - b_2)*del_L_array**2
+            obj_record.append(obj)
 
             if b_array_path:
                 info['b_array_path'].append(b_array)

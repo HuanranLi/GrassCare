@@ -55,7 +55,7 @@ def U_array_init(ambient_dimension, rank, count, clusters, bound_zero = 1e-10,  
                 U_array[i] = q_i
 
             #make sure its orthogonal
-            print(np.linalg.norm(U_array[i].T @ U_array[i] - np.identity(r)))
+            #print(np.linalg.norm(U_array[i].T @ U_array[i] - np.identity(r)))
             assert np.linalg.norm(U_array[i].T @ U_array[i] - np.identity(r)) < bound_zero
             #make sure its normal
             assert  np.linalg.norm( np.linalg.norm(U_array[i], axis = 0) - np.ones(r) )  < bound_zero
@@ -112,6 +112,7 @@ def b_array_init(count, domain = 'disk', style = 'random', U_array = None, eps =
         u, s, vt = np.linalg.svd(U_array_flat.T, full_matrices= False)
         b_array = (np.diag(s[:2]) @ vt[:2,:]).T
 
+        
         #scale back to the disk
         for b in b_array:
             if np.linalg.norm(b) >= 1:

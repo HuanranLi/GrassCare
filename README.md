@@ -85,7 +85,11 @@ The major framework this project uses are Python, and its supplementary packages
         </table>
 
   * labels: A np.ndarray with N elements where i'th entry corresponds to U_i'th label. Labels start index at 0.
-  * video: True - Generate a video in gif format to display the path with shifting in time. If only one single time frame is contained in S, (i.e. T = 0), video will be generated to show its optimization path instead of clustering path.
+  * video: True - Generate a video in gif and pdf format to display the path with shifting in time. If only one single time frame is contained in S, (i.e. T = 0), video will be generated to show its optimization path instead of clustering path.
+  * embedding_picture: True - Generate a picture of embedding for single time frame mode.
+  * optimizer: 'Gradient Descent' or 'ADAM'
+  * max_epoch: Default 500. Defines the maximum GrassCare training iterations
+  * step_size: Default 1.
   * optional_params: It is default to be an empty dictionary. If no optional parameter is needed, just run `grasscare_plot(S, labels, video)`. Here are optional parameters:
     <table id="OPT">
     <tr>
@@ -102,22 +106,7 @@ The major framework this project uses are Python, and its supplementary packages
       <td>b_array_init_syle</td>
       <td>{'PCA', 'random'}</td>
       <td>Define how the initial low-dimensional points are created. 'PCA' would vectorize the Grassmannian matrix and do PCA. Default: 'random'</td>
-    </tr>
-     <tr>
-      <td>max_epoch</td>
-      <td>int</td>
-      <td>The maximum of iteration for the optimization process. Default: 500</td>
-    </tr>
-     <tr>
-      <td>step_size</td>
-      <td>Float</td>
-      <td>The step size for the optimization process. Default: 1</td>
-    </tr>
-     <tr>
-      <td>objective_plot</td>
-      <td>Boolean</td>
-      <td>Plot the objective function at the end of optimization. Default: True</td>
-    </tr>     
+    </tr>    
     <tr>
       <td>Targets</td>
       <td>np.ndarray([Matrices])</td>
@@ -132,11 +121,6 @@ The major framework this project uses are Python, and its supplementary packages
       <td>GoogleColab</td>
       <td>Boolean</td>
       <td>True if running the program in Google Colab. The tool used for printing the update for each iteration is different. Default: False</td>
-    </tr>
-    <tr>
-      <td>final_picture</td>
-      <td>Boolean</td>
-      <td>True if user want the final picture of the gif. Default: True</td>
     </tr>
     <tr>
       <td>no_graph</td>
