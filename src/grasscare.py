@@ -13,7 +13,6 @@ import os
 from Gradient_Descent import *
 from Plot_Functions import *
 from Initialization import *
-from GROUSE import *
 
 def grasscare_plot(S, 
                     labels, 
