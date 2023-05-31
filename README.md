@@ -94,8 +94,7 @@ The major framework this project uses are Python, and its supplementary packages
 
 <!-- USAGE EXAMPLES -->
 ### Demo
-* To find the best embedding, please refer [Demo.ipynb](https://github.com/HuanranLi/GrassCare-Plot/blob/main/demo/Demo.ipynb). 
-
+* To find the best embedding, please refer src/main.py.
 <!-- ROADMAP -->
 ## Roadmap
 
