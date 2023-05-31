@@ -55,8 +55,8 @@ The major framework this project uses are Python, and its supplementary packages
 ## Usage
 ### Function Interface
 <!-- Function Interface -->
- The main function is under [src/grasscare.py](https://github.com/HuanranLi/GrassCare-Plot/blob/main/src/grasscare.py), called `grasscare_plot(S, labels, video, optional_params = {})`. An embedding will be calculated and returned in the same format as the input array S. A graph will be plotted containing all the points with the new embedding. It has following parameters:
-  * S: A matrix of Grassmannian points, where U_i^t means i'th Grassmannian point at time t.
+ The main function is under src/Grasscare.py, called `grasscare(U_array)`. An embedding will be calculated and returned in the same format as the input array U_array. A graph will be plotted containing all the points with the new embedding. It has following parameters:
+  * U_array: A matrix of Grassmannian points, where U_i^t means i'th Grassmannian point at time t.
 
     <table id="vertical-1">
             <tr>
@@ -84,59 +84,11 @@ The major framework this project uses are Python, and its supplementary packages
             </tr>
         </table>
 
-  * labels: A np.ndarray with N elements where i'th entry corresponds to U_i'th label. Labels start index at 0.
-  * video: Default True - Generate a video in gif and pdf format to display the path with shifting in time. If only one single time frame is contained in S, (i.e. T = 0), video will be generated to show its optimization path instead of clustering path.
-  * embedding_picture: Default True - Generate a picture of embedding for single time frame mode.
-  * optimizer: Default 'Gradient Descent' - Or 'ADAM'
-  * max_epoch: Default 500 - Defines the maximum GrassCare training iterations
-  * step_size: Default 1
-  * optional_params: It is default to be an empty dictionary. If no optional parameter is needed, just run `grasscare_plot(S, labels, video)`. Here are optional parameters:
-    <table id="OPT">
-    <tr>
-      <th>Name</th>
-      <th>Value Type</th>
-      <th>Explanation</th>
-    </tr>
-    <tr>
-      <td>video_tail</td>
-      <td>Int</td>
-      <td>The length of the tail drawn in the video. (input -1 if all tail points needed to be drawn). Default: -1</td>
-    </tr>
-    <tr>
-      <td>b_array_init_syle</td>
-      <td>{'PCA', 'random'}</td>
-      <td>Define how the initial low-dimensional points are created. 'PCA' would vectorize the Grassmannian matrix and do PCA. Default: 'random'</td>
-    </tr>    
-    <tr>
-      <td>Targets</td>
-      <td>np.ndarray([Matrices])</td>
-      <td>An array of targets points wanted to be drawn if available. Default: []</td>
-    </tr>
-    <tr>
-      <td>path_names</td>
-      <td>np.ndarray([Strings])</td>
-      <td>An array of names for each point, if a legend is wanted to be drawn. Mainly used for GROUSE. Default: []</td>
-    </tr>
-    <tr>
-      <td>GoogleColab</td>
-      <td>Boolean</td>
-      <td>True if running the program in Google Colab. The tool used for printing the update for each iteration is different. Default: False</td>
-    </tr>
-    <tr>
-      <td>folder_path</td>
-      <td>String</td>
-      <td>The path that the user want the result folder to be created in. Default: './'</td>
-    </tr>
-    <tr>
-      <td>folder_name</td>
-      <td>String</td>
-      <td>The name of the folder that will be created for the result. Default: Current Time (ie. '2021-09-06_18-56-50_results')</td>
-    </tr>
-
-    </table>
-
-
-
+  * eta: training Step size: default to 1
+  * moment: Momentum step size: default to 1
+  * max_iter: Maximum interation the algorithm will run: default to 400
+  * init: Initialization method for the embedding: default to 'random'. Other method is for developing purpose.
+  * beta: Controls the density of the embedding: default to 2.
 
 
 
