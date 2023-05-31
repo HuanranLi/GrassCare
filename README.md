@@ -56,33 +56,7 @@ The major framework this project uses are Python, and its supplementary packages
 ### Function Interface
 <!-- Function Interface -->
  The main function is under src/Grasscare.py, called `grasscare(U_array)`. An embedding will be calculated and returned in the same format as the input array U_array. A graph will be plotted containing all the points with the new embedding. It has following parameters:
-  * U_array: A matrix of Grassmannian points, where U_i^t means i'th Grassmannian point at time t.
-
-    <table id="vertical-1">
-            <tr>
-              <th></th>
-              <th>Subspace 1</th>
-              <th>Subspace 1</th>
-              <th>...</th>
-              <th>Subspace N</th>
-            </tr>
-            <tr>
-                <th>t = 0</th>
-                <td>U<sub>0</sub><sup>0</sup></td> <td>U<sub>1</sub><sup>0</sup></td> <td>...</td> <td>U<sub>N</sub><sup>0</sup></td>
-            </tr>
-            <tr>
-                <th>t = 1</th>
-                <td>U<sub>0</sub><sup>1</sup></td> <td>U<sub>1</sub><sup>1</sup></td> <td>...</td> <td>U<sub>N</sub><sup>1</sup></td>
-            </tr>
-            <tr>
-                <th>...</th>
-                      <td>...</td>      <td>...</td>      <td>...</td>      <td>...</td>
-            </tr>
-            <tr>
-                <th>t = T</th>
-                <td>U<sub>0</sub><sup>T</sup></td> <td>U<sub>1</sub><sup>T</sup></td> <td>...</td> <td>U<sub>N</sub><sup>T</sup></td>
-            </tr>
-        </table>
+  * U_array: A array of matrices (Grassmannian points)
 
   * eta: training Step size: default to 1
   * moment: Momentum step size: default to 1
