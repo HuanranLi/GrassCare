@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 import imageio
 
-def plot_embedding(training_history, labels, save = True):
+def plot_embedding(training_history, labels, save = True, name = 'Embedding'):
     #Color Map For the plot
     cmap=plt.get_cmap("jet")
     c_array = [cmap(i / max(labels)) for i in labels]
@@ -26,7 +26,7 @@ def plot_embedding(training_history, labels, save = True):
     plt.axis('off')
     
     if save:
-        plt.savefig('Embedding.pdf', format = 'pdf')
+        plt.savefig(name + '.pdf', format = 'pdf')
     
     plt.show()
     
@@ -95,7 +95,7 @@ def gif_plot(filenames, gif_name, times_per_pic = 1, time_for_last = 30):
 
     
     
-def plot_video(training_history, labels, cmap_name = 'jet'):
+def plot_video(training_history, labels, cmap_name = 'jet', name = 'Video'):
 
     #Color Map For the plot
     cmap=plt.get_cmap(cmap_name)
@@ -145,7 +145,7 @@ def plot_video(training_history, labels, cmap_name = 'jet'):
         filenames.append( str(h['iter']) + '.png' )
         plt.close()
     
-    gif_plot(filenames, gif_name = 'Video.gif')
+    gif_plot(filenames, gif_name = name + '.gif')
         
         
         

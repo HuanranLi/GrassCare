@@ -20,22 +20,38 @@ Parallelize del_L: +90s
 
 def main():
 
-    U_array, labels = U_array_3d_init(1000)
+    U_array, labels = U_array_3d_init(300)
     print(U_array.shape)
                                     
-    plot_3d(U_array, labels)
+    #plot_3d(U_array, labels)
+    
+
     
     start_time = time.time()
-    training_history = grasscare(U_array, eta = 2, moment = 0.9, max_iter = 500, init = '3D', beta = 2)
-    
+    training_history_GD = grasscare(U_array, gradient_method = 'MomentumGD', eta = 2, moment = 0.9, max_iter = 300, init = '3D', beta = 2)
     time_cost = time.time() - start_time
     print('Time:', np.round(time_cost))
      
-    plot_video(training_history, labels, cmap_name = 'rainbow')
-    #plot_process(training_history, labels, save = True)
-    plot_embedding(training_history, labels, save = True)
+    plot_video(training_history_GD, labels, cmap_name = 'rainbow', name = 'Video_GD')
+    plot_embedding(training_history_GD, labels, save = True, name = 'Embedding_GD')
     
-    np.savez_compressed('history-input', training_history = training_history, U_array = U_array, labels = labels, allow_pickle = True)
+    obj_array_GD = [i['obj'] for i in training_history_GD]
+
+    
+    start_time = time.time()
+    training_history_ADAM = grasscare(U_array, gradient_method = 'ADAM', eta = 0.01, max_iter = 300, init = '3D', beta = 2)
+    time_cost = time.time() - start_time
+    print('Time:', np.round(time_cost))
+     
+    plot_video(training_history_ADAM, labels, cmap_name = 'rainbow', name = 'Video_ADAM')
+    plot_embedding(training_history_ADAM, labels, save = True, name = 'Embedding_ADAM')
+    
+    obj_array_ADAM = [i['obj'] for i in training_history_ADAM]
+    
+    plt.plot(obj_array_GD, label = 'Gradient Descent')
+    plt.plot(obj_array_ADAM, label = 'ADAM')
+    plt.show()
+    
     
     
   

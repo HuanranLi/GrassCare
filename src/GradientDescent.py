@@ -32,18 +32,13 @@ def retraction_GD(b_array, del_L_array, eta, moment, old_del, eps=1e-5):
     return new_b_array
 
 
-def retraction_ADAM(b_array, del_L_array, alpha, beta1, beta2, eps=1e-8):
-    K = b_array.shape[0]
-    m = np.zeros_like(b_array)
-    v = np.zeros_like(b_array)
-    t = 0
+def retraction_ADAM(b_array, del_L_array, alpha, beta1, beta2, t, m, v, eps=1e-8):
 
     # ADAM update
-    t += 1
     m = beta1 * m + (1 - beta1) * del_L_array
     v = beta2 * v + (1 - beta2) * np.square(del_L_array)
     m_hat = m / (1 - beta1 ** t)
     v_hat = v / (1 - beta2 ** t)
     new_b_array = b_array - alpha * m_hat / (np.sqrt(v_hat) + eps)
 
-    return new_b_array
+    return new_b_array, m, v

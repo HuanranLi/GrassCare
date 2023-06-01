@@ -45,6 +45,11 @@ def grasscare(U_array, gradient_method = 'MomentumGD', eta = 1, moment = 0.9, ma
     #record all the training history
     history = []
 
+    #ADAM variables
+    if gradient_method == 'ADAM':
+        m = np.zeros_like(b_array)
+        v = np.zeros_like(b_array)
+    
     for iter in range(max_iter):
 
         # Calcuate Probability Matrix in Poincare Disk
@@ -58,18 +63,23 @@ def grasscare(U_array, gradient_method = 'MomentumGD', eta = 1, moment = 0.9, ma
                             P_Gr_mat,
                             dist_b_array_mat)
 
-        if gradient_method = 'MomentumGD':
+        if gradient_method == 'MomentumGD':
             new_b_array = retraction_GD(b_array,
                                         del_L_array,
                                         eta,
                                         moment,
                                         old_del)
-        elif gradient_method = 'ADAM':
-            new_b_array = retraction_ADAM(b_array,
+        elif gradient_method == 'ADAM':
+            new_b_array, m, v = retraction_ADAM(b_array,
                                         del_L_array,
                                         eta,
                                         beta1 = 0.5,
                                         beta2 = 0.7,
+                                        t = iter + 1,
+                                        m = m,
+                                        v = v)
+        else:
+            assert False
 
 
         old_del =  del_L_array
