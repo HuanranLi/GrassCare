@@ -27,6 +27,7 @@ def b_array_init(count):
 
 
 def grasscare(U_array, gradient_method = 'MomentumGD', eta = 1, moment = 0.9, max_iter = 400, init = 'random', beta = 2):
+    U_array = np.array(U_array)
     #random init Poincare Embedding
     if init == 'random':
         b_array = b_array_init(U_array.shape[0])
@@ -49,7 +50,7 @@ def grasscare(U_array, gradient_method = 'MomentumGD', eta = 1, moment = 0.9, ma
     if gradient_method == 'ADAM':
         m = np.zeros_like(b_array)
         v = np.zeros_like(b_array)
-    
+
     for iter in range(max_iter):
 
         # Calcuate Probability Matrix in Poincare Disk
