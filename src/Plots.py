@@ -37,7 +37,11 @@ def plot_color_bar(classes, color_scheme='jet'):
 
 
 
-def plot_embedding(training_history, labels, save = True, name = 'Embedding', color_scheme = "jet"):
+def plot_embedding(training_history, labels,
+                    save = True,
+                    name = 'Embedding',
+                    color_scheme = "jet",
+                    scatter_size = 20):
     #Color Map For the plot
     cmap=plt.get_cmap(color_scheme)
     c_array = [cmap(i / max(labels)) for i in labels]
@@ -52,7 +56,7 @@ def plot_embedding(training_history, labels, save = True, name = 'Embedding', co
 
     #plotting
     plt.gca().set_aspect('equal')
-    plt.scatter(embedding[:,0], embedding[:, 1], c = c_array)
+    plt.scatter(embedding[:,0], embedding[:, 1], c = c_array, s = scatter_size)
     plt.xlim(-1.1,1.1)
     plt.ylim(-1.1,1.1)
     # Plot the circle
