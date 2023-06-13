@@ -17,11 +17,11 @@ GPT-Improved: 97s
 '''
 
 def main():
-    U_array, labels, Centroids = U_array_init(ambient_dimension = 100,
+    U_array, labels, Centroids = U_array_init(ambient_dimension = 50,
                            rank = 5,
-                           count = 200,
-                           clusters = 2,
-                           err_var = 0.0)
+                           count = 51,
+                           clusters = 3,
+                           err_var = 0.1)
 
     #U_array, labels = U_array_3d_init(200)
     print(U_array.shape)
@@ -29,7 +29,7 @@ def main():
     #plot_3d(U_array, labels)
 
     start_time = time.time()
-    training_history = grasscare(U_array, eta = 2, moment = 0.9, max_iter = 100, beta = 1)
+    training_history = grasscare(U_array, gradient_method = 'ADAM', eta =0.1, moment = 0.9, max_iter = 40, beta = 1)
 
     time_cost = time.time() - start_time
     print('Time:', np.round(time_cost))
@@ -40,7 +40,7 @@ def main():
 
 
 
-    np.save('history.npy', training_history, allow_pickle=True)
+    #np.save('history.npy', training_history, allow_pickle=True)
 
 
 if __name__ == '__main__':
