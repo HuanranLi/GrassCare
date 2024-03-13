@@ -22,7 +22,7 @@ def L_obj(P_Ball_mat, P_Gr_mat):
     mat = np.log(np.divide(1, filled_P_Ball_mat))
     mat = np.multiply(mat, P_Gr_mat)
     sum += np.sum(mat)
-    
+
     return sum
 '''
 def L_obj(P_Ball_mat, P_Gr_mat):
@@ -95,7 +95,10 @@ def del_L(b_array, P_Ball_mat, P_Gr_mat, dist_b_array_mat):
     del_L_array = np.zeros(b_array.shape)
 
     for i in range(K):
-        del_array = np.array([del_d_p(b_array[i], b_array[k]) if k != i else 0 for k in range(K)])
-        del_L_array[i] = 4 * np.sum(dist_b_array_mat[i, :K] * (P_Gr_mat[i, :K] - P_Ball_mat[i, :K]) * del_array[:K])
+        del_array = [del_d_p(b_array[i], b_array[k]) if k != i else np.zeros(2) for k in range(K)]
+        del_array = np.array(del_array)
+        # print(del_array.shape)
+        # del_L_array[i] = 4 * np.sum(dist_b_array_mat[i, :K] * (P_Gr_mat[i, :K] - P_Ball_mat[i, :K]) * del_array[:K])
+        del_L_array[i] = 4 * (dist_b_array_mat[i, :K] * (P_Gr_mat[i, :K] - P_Ball_mat[i, :K])) @ del_array[:K]
 
     return del_L_array
