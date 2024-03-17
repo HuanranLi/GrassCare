@@ -26,7 +26,7 @@ def b_array_init(count):
 
 
 
-def grasscare(U_array, gradient_method = 'MomentumGD', eta = 1, moment = 0.9, max_iter = 400, init = 'random', beta = 2):
+def grasscare(U_array, gradient_method = 'MomentumGD', eta = 1, moment = 0.9, max_iter = 400, init = 'random', beta = 2, verbose = 1):
     U_array = np.array(U_array)
     #random init Poincare Embedding
     if init == 'random':
@@ -89,6 +89,7 @@ def grasscare(U_array, gradient_method = 'MomentumGD', eta = 1, moment = 0.9, ma
         record = {'iter': iter, 'obj': Loss, 'b_array': b_array}
         history.append(record)
 
-        print(iter, Loss)
+        if verbose == 1:
+            print(iter, Loss)
 
     return history
