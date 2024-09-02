@@ -1,85 +1,63 @@
+# GrassCare
 
+GrassCare is a Python package designed for visualizing high-dimensional Grassmannians on the Poincaré disk. This package provides tools to effectively project and preserve the geometry of the original high-dimensional Grassmannian in a 2D embedding. The core function of the package is `grasscare`, which utilizes gradient descent methods to minimize the KL-divergence between the affinity matrices of the Grassmannian and the Poincaré disk.
 
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
+## Features
 
+- **Efficient Projection**: GrassCare determines the optimal angle for projecting Grassmannians onto the Poincaré disk, preserving geodesic distances.
+- **High-dimensional Support**: Maintains the geometry of high-dimensional Grassmannians while embedding them into a low-dimensional plane, effectively preventing distortion during dimension reduction.
+- **Various Gradient Descent Methods**: Supports multiple gradient descent methods, including MomentumGD and ADAM, for optimizing the embedding.
 
-  <h3 align="center">Poincar&eacute; Embedded Symmetric SNE on Grassmannian Manifold(GrassCar&eacute)</h3>
+## Installation
 
-</p>
+To use GrassCare, clone the repository and install the required dependencies:
 
-
-
-
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-      <ul>
-           <li><a href="#function-interface">Function Interface</a></li>
-      </ul>
-      <ul>
-           <li><a href="#demo">Demo</a></li>
-      </ul>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ol>
-</details>
-
-
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
-<BODY>
-  <IMG SRC="https://github.com/HuanranLi/GrassCare-Plot/blob/main/graph/Optimization%20Process.gif" width="512" height="512">
-</BODY>
-
-This project provides a method similar to <a href = 'https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding'>t-SNE</a> for finding low-dimensional embedding for <a href = 'https://en.wikipedia.org/wiki/Grassmannian'>Grassmannian</a>. Instead of plotting it on to a 2-d plane, this algrithm manages to find the embedding on a 2-d <a href = 'https://en.wikipedia.org/wiki/Poincar%C3%A9_disk_model'>Poincar&eacute; Disk</a>, which is superior in representing points with hierarchical structures.
-
-### Built With
-
-The major framework this project uses are Python, and its supplementary packages.
-* [Python3](https://www.python.org/)
-* [Numpy](https://numpy.org/)
-* [Matplotlib](https://matplotlib.org/)
+```bash
+git clone https://github.com/HuanranLi/GrassCare.git
+cd GrassCare
+pip install -r requirements.txt
+```
 
 ## Usage
-### Function Interface
-<!-- Function Interface -->
- The main function is under src/Grasscare.py, called `grasscare(U_array)`. An embedding will be calculated and returned in the same format as the input array U_array. A graph will be plotted containing all the points with the new embedding. It has following parameters:
-  * U_array: A array of matrices (Grassmannian points)
 
-  * eta: training Step size: default to 1
-  * moment: Momentum step size: default to 1
-  * max_iter: Maximum interation the algorithm will run: default to 400
-  * init: Initialization method for the embedding: default to 'random'. Other method is for developing purpose.
-  * beta: Controls the density of the embedding: default to 2.
+### Importing the Package
 
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from GrassCare import grasscare
+```
 
+### Core Function: `grasscare`
 
-<!-- USAGE EXAMPLES -->
-### Demo
-* To find the best embedding, please refer src/main.py.
-<!-- ROADMAP -->
-## Roadmap
+The `grasscare` function is the primary interface of this package. Below is an example of how to use this function:
 
-See the [open issues](https://github.com/HuanranLi/Poincare-Embedded-Symmetric-SNE/issues) for a list of proposed features (and known issues).
+```python
+# Example usage
+U_array = np.random.rand(10, 3, 3)  # Replace with actual Grassmannian data
+history = grasscare(U_array, gradient_method='ADAM', eta=0.01, max_iter=500, init='random', verbose=1)
 
+# Visualizing the embedding
+final_embedding = history[-1]['b_array']
+plt.scatter(final_embedding[:, 0], final_embedding[:, 1])
+plt.show()
+```
 
+### Parameters
 
+- `U_array`: Input array representing the Grassmannian data.
+- `gradient_method`: The method for gradient descent (`'MomentumGD'` or `'ADAM'`).
+- `eta`: Learning rate for the gradient descent.
+- `moment`: Momentum factor (used only with `'MomentumGD'`).
+- `max_iter`: Maximum number of iterations.
+- `init`: Initialization method (`'random'` or `'3D'`).
+- `beta`: Parameter controlling the spread in the Poincaré disk.
+- `verbose`: If set to 1, prints the loss at each iteration.
 
-<!-- CONTACT -->
-## Contact
+### Example
 
-Huanran Li - [Website](https://huanranli.github.io/) - hli488@wisc.edu
+An example of using `grasscare` can be found in the `main.py` script included in this repository.
 
-Project Link: [https://github.com/HuanranLi/GrassCare-Plot](https://github.com/HuanranLi/GrassCare-Plot)
+## Paper
+
+The detailed methodology and theoretical background of GrassCare can be found in the associated research paper: [GrassCaré: Visualizing the Grassmannian on the Poincaré Disk](https://link.springer.com/article/10.1007/s42979-023-02597-0).
